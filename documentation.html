@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documentation - DDLSim-Lab</title>
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <style>
+    .navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .doc-box { padding: 2rem; background: #f8f9fa; border-radius: 8px; margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="container is-max-desktop">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="index.html" style="font-weight: bold; font-size: 1.2rem;">DDLSim-Lab</a>
+    </div>
+    <div class="navbar-menu is-active" style="background-color: transparent; box-shadow: none;">
+      <div class="navbar-end">
+        <a class="navbar-item" href="index.html">Home</a>
+        <a class="navbar-item" href="about.html">About & Author</a>
+        <a class="navbar-item" href="research.html">Research & Experiments</a>
+        <a class="navbar-item" href="documentation.html" style="color: #66b3ff;">Documentation</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h1 class="title is-2 has-text-centered">Quick Start Guide</h1>
+    
+    <div class="doc-box">
+      <h2 class="title is-4">Installation</h2>
+      <p>Clone the repository and install the dependencies:</p>
+      <pre style="margin-top:10px; border-radius: 6px;"><code>git clone https://github.com/ktruby-oss/DDLSim-Lab.git
+cd DDLSim-Lab
+pip install -r requirements.txt</code></pre>
+    </div>
+
+    <div class="doc-box">
+      <h2 class="title is-4">Running a Simulation</h2>
+      <p>Execute the main script to start a basic 2-node simulation with random latency and packet loss:</p>
+      <pre style="margin-top:10px; border-radius: 6px;"><code>python main.py</code></pre>
+      <br>
+      <p>Or use an advanced configuration:</p>
+      <pre style="margin-top:10px; border-radius: 6px;"><code>python main.py --config configs/edge_cloud_hybrid.yaml</code></pre>
+    </div>
+
+    <div class="has-text-centered">
+      <a href="https://github.com/ktruby-oss/DDLSim-Lab/tree/main/docs" target="_blank" class="button is-link is-large is-rounded">
+        View Full Documentation on GitHub
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        <strong>DDLSim-Lab</strong> &copy; 2025 by Kaitlyn Brishae Truby.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

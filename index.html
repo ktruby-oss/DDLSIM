@@ -12,55 +12,60 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
   <script defer src="static/js/fontawesome.all.min.js"></script>
+  <style>
+    .navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .hero-image { border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px; }
+  </style>
 </head>
 <body>
 
-<section class="hero">
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="container is-max-desktop">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="index.html" style="font-weight: bold; font-size: 1.2rem;">DDLSim-Lab</a>
+    </div>
+    <div class="navbar-menu is-active" style="background-color: transparent; box-shadow: none;">
+      <div class="navbar-end">
+        <a class="navbar-item" href="index.html">Home</a>
+        <a class="navbar-item" href="about.html">About & Author</a>
+        <a class="navbar-item" href="research.html">Research & Experiments</a>
+        <a class="navbar-item" href="documentation.html">Documentation</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero is-info is-medium">
   <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">DDLSim-Lab</h1>
-          <h2 class="subtitle is-3">Open-Source Research Platform for Distributed Deep Learning Systems</h2>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <strong>Kaitlyn Brishae Truby (Kaitlyn Truby)</strong>
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">Contributed by many American universities</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- Code Link -->
-              <span class="link-block">
-                <a href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>GitHub Repository</span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </div>
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-1 publication-title">DDLSim-Lab</h1>
+      <h2 class="subtitle is-3">Open-Source Research Platform for Distributed Deep Learning Systems</h2>
+      <div class="is-size-5 publication-authors" style="margin-top: 20px;">
+        <span class="author-block"><strong>Kaitlyn Brishae Truby (Kaitlyn Truby)</strong></span><br>
+        <span class="author-block">Contributed by many American universities</span>
+      </div>
+      
+      <div class="publication-links" style="margin-top: 30px;">
+        <a href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank" class="button is-dark is-large is-rounded">
+          <span class="icon"><i class="fab fa-github"></i></span>
+          <span>GitHub Repository</span>
+        </a>
+        <a href="research.html" class="button is-light is-large is-rounded">
+          <span class="icon"><i class="fas fa-flask"></i></span>
+          <span>Explore Research</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section hero is-light">
+<section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+    <div class="columns is-vcentered">
+      <div class="column is-half">
+        <h2 class="title is-3">Platform Overview</h2>
         <div class="content has-text-justified">
           <p>
             DDLSim-Lab is an open-source research platform designed to simulate, analyze, and optimize distributed deep learning systems using AI-driven control mechanisms.
@@ -71,77 +76,28 @@
           </p>
         </div>
       </div>
+      <div class="column is-half has-text-centered">
+        <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Distributed+Deep+Learning+Architecture" alt="Architecture" class="hero-image">
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section hero is-light">
   <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
+    <div class="columns is-vcentered">
+      <div class="column is-half has-text-centered">
+        <img src="https://placehold.co/600x400/34495e/ffffff?text=Bare-Metal+Infrastructure+Simulation" alt="Bare Metal" class="hero-image">
+      </div>
+      <div class="column is-half">
         <h2 class="title is-3">Why Bare-Metal is Required</h2>
         <div class="content has-text-justified">
-          <p>To achieve scientifically valid results, DDLSim-Lab <strong>must</strong> run on bare-metal infrastructure. Virtualization layers introduce non-deterministic noise that undermines the fidelity of network and performance measurements. Bare-metal deployment ensures:</p>
+          <p>To achieve scientifically valid results, DDLSim-Lab <strong>must</strong> run on bare-metal infrastructure. Virtualization layers introduce non-deterministic noise. Bare-metal deployment ensures:</p>
           <ul>
-            <li><strong>Elimination of virtualization overhead</strong> – CPU, memory, and I/O performance reflect true hardware capabilities, essential for accurate scaling studies.</li>
-            <li><strong>Realistic network behavior</strong> – Direct access to NICs enables precise emulation of latency, jitter, packet loss, and link failures as they occur in production data centers and edge sites.</li>
-            <li><strong>High-fidelity distributed experiments</strong> – Kernel-level networking, SR-IOV, and RDMA support allow experimentation with cutting-edge interconnect technologies without abstraction artifacts.</li>
+            <li><strong>Elimination of virtualization overhead</strong> – Essential for accurate scaling studies.</li>
+            <li><strong>Realistic network behavior</strong> – Precise emulation of latency, jitter, packet loss.</li>
+            <li><strong>High-fidelity distributed experiments</strong> – Support for SR-IOV, RDMA, and advanced interconnects.</li>
           </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Key Contributions</h2>
-        <div class="content has-text-justified">
-          <p>DDLSim-Lab introduces several novel contributions to the distributed AI systems landscape:</p>
-          <ul>
-            <li><strong>AI-driven control plane</strong> – A learning-based orchestrator that adapts training strategies in response to observed network and compute conditions.</li>
-            <li><strong>Internet-scale infrastructure simulation</strong> – Models geographically distributed edge nodes, regional data centers, and core cloud facilities with realistic WAN characteristics.</li>
-            <li><strong>Advanced fault injection</strong> – Supports Byzantine failures, network partitioning, cascading failures, and hardware-level faults (e.g., bit flips, NIC drops).</li>
-            <li><strong>Multi-agent system modeling</strong> – Enables decentralized coordination where each node runs an autonomous agent negotiating resource shares and data placement.</li>
-            <li><strong>Reproducible experiment pipelines</strong> – Integrated logging, version-controlled configurations, and automated report generation ensure experimental repeatability.</li>
-            <li><strong>Real-time observability</strong> – Built-in Prometheus exporters and Grafana dashboards provide live metrics on throughput, latency, resource utilization, and error rates.</li>
-            <li><strong>Cybersecurity for AI</strong> – Includes modules for simulating adversarial network attacks, intrusion detection systems, and secure enclave training environments.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Research Use Cases</h2>
-        <div class="content has-text-justified">
-          <ul>
-            <li><strong>Distributed training optimization</strong> – Experiment with novel data partitioning, pipeline parallelism, and communication-overlap techniques.</li>
-            <li><strong>Failure resilience testing</strong> – Inject Byzantine faults, network partitions, and hardware failures to evaluate recovery mechanisms.</li>
-            <li><strong>AI-driven scheduling</strong> – Train reinforcement learning agents to dynamically allocate resources based on workload characteristics.</li>
-            <li><strong>Edge AI simulation</strong> – Model heterogeneous edge-cloud hierarchies with constrained devices, intermittent connectivity, and strict latency bounds.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Call for Infrastructure Partners (Testbeds)</h2>
-        <div class="content has-text-justified">
-          <p>
-            DDLSim-Lab is a fully open-source research platform available to any researcher, professor, or student worldwide. To advance this project and enable larger-scale experiments, we are actively seeking contributions of bare-metal servers, cloud computing credits, and advanced networking hardware. Your support directly accelerates AI systems research and helps the global scientific community. We welcome partnerships with testbeds, universities, and technology providers.
-          </p>
         </div>
       </div>
     </div>
@@ -150,8 +106,9 @@
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX Citation</h2>
-    <pre><code>@software{truby2025ddlsimlab,
+    <h2 class="title is-3 has-text-centered">Academic Citation</h2>
+    <p class="has-text-centered">If you use DDLSim-Lab in your research, please cite our project:</p>
+    <pre style="border-radius: 8px;"><code>@software{truby2025ddlsimlab,
   author = {Truby, Kaitlyn Brishae},
   title = {DDLSim-Lab: Open-Source Research Platform for Distributed Deep Learning Systems},
   year = {2025},
@@ -166,7 +123,8 @@
   <div class="container">
     <div class="content has-text-centered">
       <p>
-        DDLSim-Lab &copy; 2025 by Kaitlyn Brishae Truby. Licensed under MIT.
+        <strong>DDLSim-Lab</strong> &copy; 2025 by Kaitlyn Brishae Truby. Licensed under MIT.<br>
+        Supported by American universities, researchers, and the open-source community.
       </p>
     </div>
   </div>
