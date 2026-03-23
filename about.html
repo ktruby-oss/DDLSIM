@@ -3,82 +3,96 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About - DDLSim-Lab</title>
+  <title>DDLSim-Lab | About & Call</title>
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script defer src="static/js/fontawesome.all.min.js"></script>
   <style>
-    .navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .profile-img { border-radius: 50%; border: 4px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    :root { --primary: #2962ff; --sidebar-width: 260px; --bg-light: #f4f6f8; }
+    body { background-color: var(--bg-light); font-family: 'Inter', sans-serif; display: flex; min-height: 100vh; margin: 0; }
+    .sidebar { width: var(--sidebar-width); background-color: #0f172a; color: #fff; position: fixed; top: 0; left: 0; height: 100vh; padding-top: 2rem; z-index: 1000; box-shadow: 2px 0 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+    .sidebar .brand { font-size: 1.5rem; font-weight: 800; text-align: center; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem; color: #fff; text-decoration: none; display: block; }
+    .sidebar a.nav-link { display: block; color: #94a3b8; padding: 1rem 2rem; text-decoration: none; font-size: 1.1rem; transition: all 0.3s ease; border-left: 4px solid transparent; }
+    .sidebar a.nav-link:hover, .sidebar a.nav-link.active { background-color: rgba(255,255,255,0.05); color: #fff; border-left: 4px solid var(--primary); }
+    .sidebar a.nav-link i { margin-right: 15px; width: 20px; text-align: center; }
+    .main-content { margin-left: var(--sidebar-width); flex: 1; padding: 3rem; transition: all 0.3s ease; width: calc(100% - var(--sidebar-width)); }
+    .fade-in { animation: fadeIn 0.8s ease-in forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .info-card { background: #fff; border-radius: 12px; padding: 3rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease; margin-bottom: 2rem; }
+    .profile-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.15); margin-bottom: 1.5rem; }
+    .call-card { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; position: relative; overflow: hidden; }
+    .call-card::after { content: ''; position: absolute; right: 0; top: 0; height: 100%; width: 40%; background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800') center/cover; opacity: 0.15; mask-image: linear-gradient(to right, transparent, black); -webkit-mask-image: linear-gradient(to right, transparent, black); }
+    .call-card .title { color: #fff; }
+    @media (max-width: 768px) {
+      .sidebar { width: 70px; } .sidebar .brand span, .sidebar a.nav-link span { display: none; }
+      .sidebar a.nav-link { padding: 1rem; text-align: center; } .sidebar a.nav-link i { margin-right: 0; }
+      .main-content { margin-left: 70px; padding: 1.5rem; width: calc(100% - 70px); }
+    }
   </style>
 </head>
 <body>
 
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-  <div class="container is-max-desktop">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="index.html" style="font-weight: bold; font-size: 1.2rem;">DDLSim-Lab</a>
-    </div>
-    <div class="navbar-menu is-active" style="background-color: transparent; box-shadow: none;">
-      <div class="navbar-end">
-        <a class="navbar-item" href="index.html">Home</a>
-        <a class="navbar-item" href="about.html" style="color: #66b3ff;">About & Author</a>
-        <a class="navbar-item" href="research.html">Research & Experiments</a>
-        <a class="navbar-item" href="documentation.html">Documentation</a>
-      </div>
-    </div>
-  </div>
+<nav class="sidebar">
+  <a href="index.html" class="brand"><i class="fas fa-microchip"></i> <span>DDLSim-Lab</span></a>
+  <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Home</span></a>
+  <a href="about.html" class="nav-link active"><i class="fas fa-user-astronaut"></i> <span>About & Call</span></a>
+  <a href="research.html" class="nav-link"><i class="fas fa-flask"></i> <span>Research</span></a>
+  <a href="documentation.html" class="nav-link"><i class="fas fa-book"></i> <span>Docs</span></a>
+  <a href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank" class="nav-link"><i class="fab fa-github"></i> <span>GitHub</span></a>
 </nav>
 
-<section class="section">
-  <div class="container is-max-desktop">
+<div class="main-content">
+  <div class="info-card fade-in">
     <div class="columns is-vcentered">
       <div class="column is-one-third has-text-centered">
-        <img src="https://placehold.co/300x300/34495e/ffffff?text=Kaitlyn+Truby" alt="Kaitlyn Truby" class="profile-img">
+        <!-- Abstract Tech Photo to represent the lead -->
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" alt="Lead Researcher" class="profile-img">
       </div>
       <div class="column is-two-thirds">
-        <h1 class="title is-2">About the Project Lead</h1>
-        <h2 class="subtitle is-4">Kaitlyn Brishae Truby</h2>
-        <div class="content has-text-justified">
+        <h2 class="title is-2" style="color: #0f172a;">Kaitlyn Brishae Truby</h2>
+        <h3 class="subtitle is-4" style="color: var(--primary);">Project Lead & Lead Researcher</h3>
+        <div class="content has-text-justified" style="font-size: 1.1rem; line-height: 1.8;">
           <p>
-            Kaitlyn Brishae Truby is the lead researcher and creator behind DDLSim-Lab. With a focus on distributed systems, AI infrastructure, and network fault tolerance, her work aims to bridge the gap between theoretical AI models and real-world system deployments.
+            Kaitlyn Brishae Truby (Kaitlyn Truby) is the visionary and lead researcher behind DDLSim-Lab. With a deep focus on distributed systems, artificial intelligence infrastructure, and network fault tolerance, her work bridges the critical gap between theoretical AI models and real-world, large-scale system deployments.
           </p>
           <p>
+            <i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i>
             <strong>Contact:</strong> <a href="mailto:kaitlyn.truby@student.uagc.edu">kaitlyn.truby@student.uagc.edu</a>
           </p>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Call for Infrastructure Partners</h2>
-    <div class="content has-text-justified" style="max-width: 800px; margin: 0 auto;">
-      <p>
-        DDLSim-Lab is a fully open-source research platform available to any researcher, professor, or student worldwide. To advance this project and enable larger-scale experiments, we are actively seeking contributions of:
-      </p>
-      <ul>
-        <li>Bare-metal servers</li>
-        <li>Cloud computing credits</li>
-        <li>Advanced networking hardware</li>
-      </ul>
-      <p>
-        Your support directly accelerates AI systems research and helps the global scientific community. We welcome partnerships with testbeds, universities, and technology providers.
-      </p>
+  <div class="info-card call-card fade-in" style="animation-delay: 0.2s;">
+    <div style="position: relative; z-index: 2;">
+      <h2 class="title is-2"><i class="fas fa-handshake" style="margin-right: 15px; color: #38bdf8;"></i>Call for Infrastructure Partners</h2>
+      <div class="content has-text-justified" style="font-size: 1.1rem; line-height: 1.8;">
+        <p>
+          DDLSim-Lab is a fully open-source research platform available to any researcher, professor, or student worldwide. To rapidly advance this project and enable massive-scale experiments, we are actively seeking infrastructure contributions:
+        </p>
+        <div class="columns" style="margin-top: 2rem;">
+          <div class="column is-4 has-text-centered">
+            <i class="fas fa-server fa-3x" style="color: #38bdf8; margin-bottom: 15px;"></i>
+            <h4 style="color: #fff; font-size: 1.2rem; font-weight: 600;">Bare-Metal Servers</h4>
+          </div>
+          <div class="column is-4 has-text-centered">
+            <i class="fas fa-cloud fa-3x" style="color: #38bdf8; margin-bottom: 15px;"></i>
+            <h4 style="color: #fff; font-size: 1.2rem; font-weight: 600;">Cloud Credits</h4>
+          </div>
+          <div class="column is-4 has-text-centered">
+            <i class="fas fa-network-wired fa-3x" style="color: #38bdf8; margin-bottom: 15px;"></i>
+            <h4 style="color: #fff; font-size: 1.2rem; font-weight: 600;">Networking Hardware</h4>
+          </div>
+        </div>
+        <p style="margin-top: 2rem; border-left: 4px solid #38bdf8; padding-left: 20px; font-style: italic;">
+          Your support directly accelerates AI systems research and equips the global scientific community with essential tools. We welcome partnerships with global testbeds, universities, and leading technology providers.
+        </p>
+      </div>
     </div>
   </div>
-</section>
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p>
-        <strong>DDLSim-Lab</strong> &copy; 2025 by Kaitlyn Brishae Truby. Licensed under MIT.
-      </p>
-    </div>
-  </div>
-</footer>
+</div>
 
 </body>
 </html>

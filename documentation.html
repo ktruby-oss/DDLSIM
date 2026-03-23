@@ -3,71 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Documentation - DDLSim-Lab</title>
+  <title>DDLSim-Lab | Documentation</title>
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script defer src="static/js/fontawesome.all.min.js"></script>
   <style>
-    .navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .doc-box { padding: 2rem; background: #f8f9fa; border-radius: 8px; margin-bottom: 2rem; }
+    :root { --primary: #2962ff; --sidebar-width: 260px; --bg-light: #f4f6f8; }
+    body { background-color: var(--bg-light); font-family: 'Inter', sans-serif; display: flex; min-height: 100vh; margin: 0; }
+    .sidebar { width: var(--sidebar-width); background-color: #0f172a; color: #fff; position: fixed; top: 0; left: 0; height: 100vh; padding-top: 2rem; z-index: 1000; box-shadow: 2px 0 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+    .sidebar .brand { font-size: 1.5rem; font-weight: 800; text-align: center; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem; color: #fff; text-decoration: none; display: block; }
+    .sidebar a.nav-link { display: block; color: #94a3b8; padding: 1rem 2rem; text-decoration: none; font-size: 1.1rem; transition: all 0.3s ease; border-left: 4px solid transparent; }
+    .sidebar a.nav-link:hover, .sidebar a.nav-link.active { background-color: rgba(255,255,255,0.05); color: #fff; border-left: 4px solid var(--primary); }
+    .sidebar a.nav-link i { margin-right: 15px; width: 20px; text-align: center; }
+    .main-content { margin-left: var(--sidebar-width); flex: 1; padding: 3rem; transition: all 0.3s ease; width: calc(100% - var(--sidebar-width)); }
+    .fade-in { animation: fadeIn 0.8s ease-in forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .doc-card { background: #fff; border-radius: 12px; padding: 2.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+    pre { background-color: #1e293b !important; color: #f8fafc !important; border-radius: 8px; padding: 1.5rem !important; }
+    code { color: #38bdf8 !important; }
+    
+    @media (max-width: 768px) {
+      .sidebar { width: 70px; } .sidebar .brand span, .sidebar a.nav-link span { display: none; }
+      .sidebar a.nav-link { padding: 1rem; text-align: center; } .sidebar a.nav-link i { margin-right: 0; }
+      .main-content { margin-left: 70px; padding: 1.5rem; width: calc(100% - 70px); }
+    }
   </style>
 </head>
 <body>
 
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-  <div class="container is-max-desktop">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="index.html" style="font-weight: bold; font-size: 1.2rem;">DDLSim-Lab</a>
-    </div>
-    <div class="navbar-menu is-active" style="background-color: transparent; box-shadow: none;">
-      <div class="navbar-end">
-        <a class="navbar-item" href="index.html">Home</a>
-        <a class="navbar-item" href="about.html">About & Author</a>
-        <a class="navbar-item" href="research.html">Research & Experiments</a>
-        <a class="navbar-item" href="documentation.html" style="color: #66b3ff;">Documentation</a>
-      </div>
-    </div>
-  </div>
+<nav class="sidebar">
+  <a href="index.html" class="brand"><i class="fas fa-microchip"></i> <span>DDLSim-Lab</span></a>
+  <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Home</span></a>
+  <a href="about.html" class="nav-link"><i class="fas fa-user-astronaut"></i> <span>About & Call</span></a>
+  <a href="research.html" class="nav-link"><i class="fas fa-flask"></i> <span>Research</span></a>
+  <a href="documentation.html" class="nav-link active"><i class="fas fa-book"></i> <span>Docs</span></a>
+  <a href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank" class="nav-link"><i class="fab fa-github"></i> <span>GitHub</span></a>
 </nav>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <h1 class="title is-2 has-text-centered">Quick Start Guide</h1>
-    
-    <div class="doc-box">
-      <h2 class="title is-4">Installation</h2>
-      <p>Clone the repository and install the dependencies:</p>
-      <pre style="margin-top:10px; border-radius: 6px;"><code>git clone https://github.com/ktruby-oss/DDLSim-Lab.git
+<div class="main-content">
+  <div class="fade-in" style="margin-bottom: 3rem;">
+    <h1 class="title is-1" style="color: #0f172a;"><i class="fas fa-terminal" style="color: var(--primary); margin-right: 15px;"></i>Documentation & Quick Start</h1>
+    <h2 class="subtitle is-4" style="color: #64748b; margin-top: 10px;">Get up and running with DDLSim-Lab in minutes</h2>
+  </div>
+
+  <div class="doc-card fade-in" style="animation-delay: 0.1s;">
+    <h2 class="title is-3"><i class="fas fa-download" style="color: #10b981; margin-right: 10px;"></i>1. Installation</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Clone the repository and install the required dependencies:</p>
+    <pre><code>git clone https://github.com/ktruby-oss/DDLSim-Lab.git
 cd DDLSim-Lab
 pip install -r requirements.txt</code></pre>
-    </div>
-
-    <div class="doc-box">
-      <h2 class="title is-4">Running a Simulation</h2>
-      <p>Execute the main script to start a basic 2-node simulation with random latency and packet loss:</p>
-      <pre style="margin-top:10px; border-radius: 6px;"><code>python main.py</code></pre>
-      <br>
-      <p>Or use an advanced configuration:</p>
-      <pre style="margin-top:10px; border-radius: 6px;"><code>python main.py --config configs/edge_cloud_hybrid.yaml</code></pre>
-    </div>
-
-    <div class="has-text-centered">
-      <a href="https://github.com/ktruby-oss/DDLSim-Lab/tree/main/docs" target="_blank" class="button is-link is-large is-rounded">
-        View Full Documentation on GitHub
-      </a>
-    </div>
-
   </div>
-</section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p>
-        <strong>DDLSim-Lab</strong> &copy; 2025 by Kaitlyn Brishae Truby.
-      </p>
-    </div>
+  <div class="doc-card fade-in" style="animation-delay: 0.2s;">
+    <h2 class="title is-3"><i class="fas fa-play-circle" style="color: #f59e0b; margin-right: 10px;"></i>2. Running a Simulation</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Execute the main script to start a basic 2-node simulation with random latency and packet loss:</p>
+    <pre><code>python main.py</code></pre>
+    <br>
+    <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Or use an advanced custom YAML configuration:</p>
+    <pre><code>python main.py --config configs/edge_cloud_hybrid.yaml</code></pre>
   </div>
-</footer>
+
+  <div class="doc-card fade-in" style="animation-delay: 0.3s;">
+    <h2 class="title is-3"><i class="fas fa-quote-right" style="color: #8b5cf6; margin-right: 10px;"></i>3. Citation</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">If you use DDLSim-Lab in your academic work, please use the following BibTeX citation:</p>
+    <pre><code>@software{truby2025ddlsimlab,
+  author = {Truby, Kaitlyn Brishae},
+  title = {DDLSim-Lab: Open-Source Research Platform for Distributed Deep Learning Systems},
+  year = {2025},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/ktruby-oss/DDLSim-Lab}}
+}</code></pre>
+  </div>
+
+  <div class="has-text-centered fade-in" style="animation-delay: 0.4s; margin-top: 3rem;">
+    <a href="https://github.com/ktruby-oss/DDLSim-Lab/tree/main/docs" target="_blank" class="button is-primary is-large is-rounded" style="padding: 0 40px; box-shadow: 0 10px 20px rgba(41, 98, 255, 0.3);">
+      <span class="icon"><i class="fab fa-github"></i></span>
+      <span>View Full Docs on GitHub</span>
+    </a>
+  </div>
+</div>
 
 </body>
 </html>

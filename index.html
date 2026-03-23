@@ -3,132 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <title>DDLSim-Lab - Distributed Deep Learning Systems Simulator</title>
-  <meta name="description" content="DDLSim-Lab is an open-source research platform designed to simulate, analyze, and optimize distributed deep learning systems using AI-driven control mechanisms.">
-  <meta name="keywords" content="DDLSim, Distributed Deep Learning, Simulator, AI infrastructure, Bare-metal">
-  <meta name="author" content="Kaitlyn Brishae Truby">
-  
+  <title>DDLSim-Lab | Home</title>
+  <meta name="description" content="DDLSim-Lab is an open-source research platform designed to simulate, analyze, and optimize distributed deep learning systems.">
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <style>
-    .navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .hero-image { border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px; }
+    :root { --primary: #2962ff; --sidebar-width: 260px; --bg-light: #f4f6f8; }
+    body { background-color: var(--bg-light); font-family: 'Inter', sans-serif; display: flex; min-height: 100vh; margin: 0; }
+    .sidebar { width: var(--sidebar-width); background-color: #0f172a; color: #fff; position: fixed; top: 0; left: 0; height: 100vh; padding-top: 2rem; z-index: 1000; box-shadow: 2px 0 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+    .sidebar .brand { font-size: 1.5rem; font-weight: 800; text-align: center; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem; color: #fff; text-decoration: none; display: block; }
+    .sidebar a.nav-link { display: block; color: #94a3b8; padding: 1rem 2rem; text-decoration: none; font-size: 1.1rem; transition: all 0.3s ease; border-left: 4px solid transparent; }
+    .sidebar a.nav-link:hover, .sidebar a.nav-link.active { background-color: rgba(255,255,255,0.05); color: #fff; border-left: 4px solid var(--primary); }
+    .sidebar a.nav-link i { margin-right: 15px; width: 20px; text-align: center; }
+    .main-content { margin-left: var(--sidebar-width); flex: 1; padding: 3rem; transition: all 0.3s ease; width: calc(100% - var(--sidebar-width)); }
+    .fade-in { animation: fadeIn 0.8s ease-in forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-banner { border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; padding: 4rem 2rem; margin-bottom: 3rem; box-shadow: 0 15px 30px rgba(0,0,0,0.15); position: relative; }
+    .hero-banner::after { content: ''; position: absolute; right: 0; top: 0; height: 100%; width: 50%; background: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800') center/cover; opacity: 0.2; mask-image: linear-gradient(to right, transparent, black); -webkit-mask-image: linear-gradient(to right, transparent, black); }
+    .hero-banner .title, .hero-banner .subtitle { color: #fff; position: relative; z-index: 2; }
+    .info-card { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); height: 100%; transition: transform 0.3s ease; }
+    .info-card:hover { transform: translateY(-5px); }
+    .feature-img { border-radius: 12px; width: 100%; height: 300px; object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    @media (max-width: 768px) {
+      .sidebar { width: 70px; } .sidebar .brand span, .sidebar a.nav-link span { display: none; }
+      .sidebar a.nav-link { padding: 1rem; text-align: center; } .sidebar a.nav-link i { margin-right: 0; }
+      .main-content { margin-left: 70px; padding: 1.5rem; width: calc(100% - 70px); }
+    }
   </style>
 </head>
 <body>
 
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-  <div class="container is-max-desktop">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="index.html" style="font-weight: bold; font-size: 1.2rem;">DDLSim-Lab</a>
-    </div>
-    <div class="navbar-menu is-active" style="background-color: transparent; box-shadow: none;">
-      <div class="navbar-end">
-        <a class="navbar-item" href="index.html">Home</a>
-        <a class="navbar-item" href="about.html">About & Author</a>
-        <a class="navbar-item" href="research.html">Research & Experiments</a>
-        <a class="navbar-item" href="documentation.html">Documentation</a>
-      </div>
-    </div>
-  </div>
+<nav class="sidebar">
+  <a href="index.html" class="brand">
+    <i class="fas fa-microchip"></i> <span>DDLSim-Lab</span>
+  </a>
+  <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> <span>Home</span></a>
+  <a href="about.html" class="nav-link"><i class="fas fa-user-astronaut"></i> <span>About & Call</span></a>
+  <a href="research.html" class="nav-link"><i class="fas fa-flask"></i> <span>Research</span></a>
+  <a href="documentation.html" class="nav-link"><i class="fas fa-book"></i> <span>Docs</span></a>
+  <a href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank" class="nav-link"><i class="fab fa-github"></i> <span>GitHub</span></a>
 </nav>
 
-<section class="hero is-info is-medium">
-  <div class="hero-body">
-    <div class="container is-max-desktop has-text-centered">
-      <h1 class="title is-1 publication-title">DDLSim-Lab</h1>
-      <h2 class="subtitle is-3">Open-Source Research Platform for Distributed Deep Learning Systems</h2>
-      <div class="is-size-5 publication-authors" style="margin-top: 20px;">
-        <span class="author-block"><strong>Kaitlyn Brishae Truby (Kaitlyn Truby)</strong></span><br>
-        <span class="author-block">Contributed by many American universities</span>
-      </div>
-      
-      <div class="publication-links" style="margin-top: 30px;">
-        <a href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank" class="button is-dark is-large is-rounded">
-          <span class="icon"><i class="fab fa-github"></i></span>
-          <span>GitHub Repository</span>
-        </a>
-        <a href="research.html" class="button is-light is-large is-rounded">
-          <span class="icon"><i class="fas fa-flask"></i></span>
-          <span>Explore Research</span>
-        </a>
-      </div>
+<div class="main-content">
+  <div class="hero-banner fade-in">
+    <h1 class="title is-1">DDLSim-Lab</h1>
+    <h2 class="subtitle is-3" style="margin-top: 10px; color: #cbd5e1;">Open-Source Research Platform for Distributed Deep Learning Systems</h2>
+    <div style="margin-top: 20px; position: relative; z-index: 2;">
+      <span class="tag is-info is-medium" style="margin-right: 10px;"><i class="fas fa-check-circle" style="margin-right:5px;"></i> Active Research Since 2025</span>
+      <span class="tag is-success is-medium"><i class="fab fa-osi" style="margin-right:5px;"></i> Fully Open Source</span>
+    </div>
+    <div style="margin-top: 30px; position: relative; z-index: 2;">
+      <p style="font-size: 1.2rem;"><strong>Project Lead:</strong> Kaitlyn Brishae Truby</p>
+      <p style="font-size: 1rem; color: #94a3b8;">Contributed by many American universities & Research Labs</p>
+    </div>
+    <div style="margin-top: 30px; position: relative; z-index: 2;">
+      <a href="https://github.com/ktruby-oss/DDLSim-Lab" class="button is-primary is-medium is-rounded" style="margin-right: 15px;">
+        <span class="icon"><i class="fab fa-github"></i></span><span>View on GitHub</span>
+      </a>
+      <a href="research.html" class="button is-light is-medium is-rounded is-outlined">
+        <span class="icon"><i class="fas fa-network-wired"></i></span><span>Explore Capabilities</span>
+      </a>
     </div>
   </div>
-</section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-vcentered">
-      <div class="column is-half">
-        <h2 class="title is-3">Platform Overview</h2>
-        <div class="content has-text-justified">
-          <p>
-            DDLSim-Lab is an open-source research platform designed to simulate, analyze, and optimize distributed deep learning systems using AI-driven control mechanisms.
-          </p>
-          <p>
-            The platform enables experimentation with large-scale, heterogeneous, and failure-prone environments, including edge-cloud hybrid infrastructures.
-            It provides researchers with a reproducible, cost-free environment to test novel algorithms, scheduling strategies, and fault-tolerance mechanisms without requiring access to expensive physical testbeds.
-          </p>
-        </div>
-      </div>
-      <div class="column is-half has-text-centered">
-        <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Distributed+Deep+Learning+Architecture" alt="Architecture" class="hero-image">
+  <div class="columns is-multiline fade-in" style="animation-delay: 0.2s;">
+    <div class="column is-7">
+      <div class="info-card">
+        <h3 class="title is-3"><i class="fas fa-layer-group has-text-primary" style="margin-right: 10px;"></i>Platform Overview</h3>
+        <p class="content has-text-justified" style="font-size: 1.1rem; line-height: 1.8;">
+          <strong>DDLSim-Lab</strong> is an open-source research platform designed to simulate, analyze, and optimize distributed deep learning systems using AI-driven control mechanisms. 
+          <br><br>
+          The platform enables experimentation with large-scale, heterogeneous, and failure-prone environments, including edge-cloud hybrid infrastructures. It provides researchers with a reproducible, cost-free environment to test novel algorithms, scheduling strategies, and fault-tolerance mechanisms without requiring access to expensive physical testbeds.
+        </p>
       </div>
     </div>
+    <div class="column is-5">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" alt="Global Network" class="feature-img">
+    </div>
   </div>
-</section>
 
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-vcentered">
-      <div class="column is-half has-text-centered">
-        <img src="https://placehold.co/600x400/34495e/ffffff?text=Bare-Metal+Infrastructure+Simulation" alt="Bare Metal" class="hero-image">
-      </div>
-      <div class="column is-half">
-        <h2 class="title is-3">Why Bare-Metal is Required</h2>
-        <div class="content has-text-justified">
-          <p>To achieve scientifically valid results, DDLSim-Lab <strong>must</strong> run on bare-metal infrastructure. Virtualization layers introduce non-deterministic noise. Bare-metal deployment ensures:</p>
+  <div class="columns is-multiline fade-in" style="animation-delay: 0.4s; margin-top: 2rem;">
+    <div class="column is-5">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800" alt="Bare Metal Servers" class="feature-img">
+    </div>
+    <div class="column is-7">
+      <div class="info-card">
+        <h3 class="title is-3"><i class="fas fa-server has-text-danger" style="margin-right: 10px;"></i>Why Bare-Metal is Required</h3>
+        <div class="content has-text-justified" style="font-size: 1.1rem; line-height: 1.8;">
+          <p>To achieve scientifically valid results, DDLSim-Lab <strong>must</strong> run on bare-metal infrastructure. Virtualization layers introduce non-deterministic noise that undermines the fidelity of network and performance measurements. Bare-metal deployment ensures:</p>
           <ul>
             <li><strong>Elimination of virtualization overhead</strong> – Essential for accurate scaling studies.</li>
-            <li><strong>Realistic network behavior</strong> – Precise emulation of latency, jitter, packet loss.</li>
-            <li><strong>High-fidelity distributed experiments</strong> – Support for SR-IOV, RDMA, and advanced interconnects.</li>
+            <li><strong>Realistic network behavior</strong> – Direct access to NICs enables precise emulation of latency, jitter, packet loss.</li>
+            <li><strong>High-fidelity experiments</strong> – Kernel-level networking, SR-IOV, and RDMA support allow experimentation with cutting-edge interconnects.</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-</section>
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title is-3 has-text-centered">Academic Citation</h2>
-    <p class="has-text-centered">If you use DDLSim-Lab in your research, please cite our project:</p>
-    <pre style="border-radius: 8px;"><code>@software{truby2025ddlsimlab,
-  author = {Truby, Kaitlyn Brishae},
-  title = {DDLSim-Lab: Open-Source Research Platform for Distributed Deep Learning Systems},
-  year = {2025},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/ktruby-oss/DDLSim-Lab}}
-}</code></pre>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p>
-        <strong>DDLSim-Lab</strong> &copy; 2025 by Kaitlyn Brishae Truby. Licensed under MIT.<br>
-        Supported by American universities, researchers, and the open-source community.
-      </p>
-    </div>
-  </div>
-</footer>
+</div>
 
 </body>
 </html>
