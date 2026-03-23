@@ -9,66 +9,121 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <style>
-    :root { --primary: #2962ff; --sidebar-width: 260px; --bg-light: #f4f6f8; }
-    body { background-color: var(--bg-light); font-family: 'Inter', sans-serif; display: flex; min-height: 100vh; margin: 0; }
-    .sidebar { width: var(--sidebar-width); background-color: #0f172a; color: #fff; position: fixed; top: 0; left: 0; height: 100vh; padding-top: 2rem; z-index: 1000; box-shadow: 2px 0 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
-    .sidebar .brand { font-size: 1.5rem; font-weight: 800; text-align: center; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem; color: #fff; text-decoration: none; display: block; }
-    .sidebar a.nav-link { display: block; color: #94a3b8; padding: 1rem 2rem; text-decoration: none; font-size: 1.1rem; transition: all 0.3s ease; border-left: 4px solid transparent; }
-    .sidebar a.nav-link:hover, .sidebar a.nav-link.active { background-color: rgba(255,255,255,0.05); color: #fff; border-left: 4px solid var(--primary); }
-    .sidebar a.nav-link i { margin-right: 15px; width: 20px; text-align: center; }
-    .main-content { margin-left: var(--sidebar-width); flex: 1; padding: 3rem; transition: all 0.3s ease; width: calc(100% - var(--sidebar-width)); }
-    .fade-in { animation: fadeIn 0.8s ease-in forwards; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    
-    .doc-card { background: #fff; border-radius: 12px; padding: 2.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+    :root { --primary: #2962ff; --bg-light: #f4f6f8; --dark: #0f172a; }
+    body { background-color: var(--bg-light); font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+    .hero { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; }
+    .hero .title, .hero .subtitle { color: #fff; position: relative; }
+    .hero-banner { border-radius: 0; padding: 4rem 2rem; margin-bottom: 0; }
+    .hero-banner::after { content: ''; position: absolute; right: 0; top: 0; height: 100%; width: 50%; background: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800') center/cover; opacity: 0.15; mask-image: linear-gradient(to right, transparent, black); -webkit-mask-image: linear-gradient(to right, transparent, black); }
+    .hero-banner .title, .hero-banner .subtitle { position: relative; z-index: 2; }
+    .info-card { background: #fff; border-radius: 12px; padding: 2.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 2rem; }
     pre { background-color: #1e293b !important; color: #f8fafc !important; border-radius: 8px; padding: 1.5rem !important; }
     code { color: #38bdf8 !important; }
     footer { margin-top: auto; padding: 2rem; text-align: center; color: #64748b; font-size: 0.9rem; border-top: 1px solid #e2e8f0; }
     @media (max-width: 768px) {
-      .sidebar { width: 70px; } .sidebar .brand span, .sidebar a.nav-link span { display: none; }
-      .sidebar a.nav-link { padding: 1rem; text-align: center; } .sidebar a.nav-link i { margin-right: 0; }
-      .main-content { margin-left: 70px; padding: 1.5rem; width: calc(100% - 70px); }
+      .hero-banner { padding: 3rem 1rem; }
+      .info-card { padding: 1.5rem; }
     }
+    /* Additional responsiveness and touch improvements */
+    @media (hover: hover) {
+      .info-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+    }
+    .info-card:active { transform: translateY(-2px); }
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    /* Navbar customization */
+    .navbar-brand, .navbar-menu { background-color: var(--dark); }
+    .navbar-item, .navbar-link { color: #fff !important; }
+    .navbar-link:hover, .navbar-item:hover, .navbar-link.is-active { background-color: rgba(255,255,255,0.1); color: #fff !important; }
+    .navbar-dropdown a.navbar-item:hover { background-color: rgba(255,255,255,0.1); color: #fff; }
+    .navbar-burger { color: #fff; }
   </style>
 </head>
 <body>
 
-<nav class="sidebar">
-  <a href="index.html" class="brand"><i class="fas fa-microchip"></i> <span>DDLSim-Lab</span></a>
-  <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Home</span></a>
-  <a href="about.html" class="nav-link"><i class="fas fa-user-astronaut"></i> <span>About & Call</span></a>
-  <a href="research.html" class="nav-link"><i class="fas fa-flask"></i> <span>Research</span></a>
-  <a href="documentation.html" class="nav-link active"><i class="fas fa-book"></i> <span>Docs</span></a>
-  <a href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank" class="nav-link"><i class="fab fa-github"></i> <span>GitHub</span></a>
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="index.html">
+        <span class="icon"><i class="fas fa-microchip"></i></span>
+        <span>DDLSim-Lab</span>
+      </a>
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start"></div>
+      <div class="navbar-end">
+        <a class="navbar-item" href="index.html">Home</a>
+        <a class="navbar-item" href="about.html">About & Call</a>
+        <a class="navbar-item" href="research.html">Research</a>
+        <a class="navbar-item" href="documentation.html">Docs</a>
+        <a class="navbar-item" href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank">
+          <span class="icon"><i class="fab fa-github"></i></span>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </nav>
 
-<div class="main-content">
-  <div class="fade-in" style="margin-bottom: 3rem;">
-    <h1 class="title is-1" style="color: #0f172a;"><i class="fas fa-terminal" style="color: var(--primary); margin-right: 15px;"></i>Documentation & Quick Start</h1>
-    <h2 class="subtitle is-4" style="color: #64748b; margin-top: 10px;">Get up and running with DDLSim-Lab in minutes</h2>
+<section class="hero is-fullheight-with-navbar">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="hero-banner fade-in">
+        <h1 class="title is-1">DDLSim-Lab</h1>
+        <h2 class="subtitle is-3">Documentation & Quick Start</h2>
+        <div style="margin-top: 20px;">
+          <span class="tag is-info is-medium"><i class="fas fa-check-circle" style="margin-right:5px;"></i> Active Research Since 2025</span>
+          <span class="tag is-success is-medium"><i class="fab fa-osi" style="margin-right:5px;"></i> Fully Open Source</span>
+        </div>
+        <div style="margin-top: 30px;">
+          <a href="https://github.com/ktruby-oss/DDLSim-Lab" class="button is-primary is-medium is-rounded" style="margin-right: 15px;">
+            <span class="icon"><i class="fab fa-github"></i></span><span>View on GitHub</span>
+          </a>
+          <a href="research.html" class="button is-light is-medium is-rounded is-outlined">
+            <span class="icon"><i class="fas fa-network-wired"></i></span><span>Explore Capabilities</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="doc-card fade-in" style="animation-delay: 0.1s;">
-    <h2 class="title is-3"><i class="fas fa-download" style="color: #10b981; margin-right: 10px;"></i>1. Installation</h2>
-    <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Clone the repository and install the required dependencies:</p>
-    <pre><code>git clone https://github.com/ktruby-oss/DDLSim-Lab.git
+<section class="section">
+  <div class="container">
+    <div class="info-card fade-in" style="animation-delay: 0.1s;">
+      <h2 class="title is-3"><i class="fas fa-download" style="color: #10b981; margin-right: 10px;"></i>1. Installation</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Clone the repository and install the required dependencies:</p>
+      <pre><code>git clone https://github.com/ktruby-oss/DDLSim-Lab.git
 cd DDLSim-Lab
 pip install -r requirements.txt</code></pre>
-  </div>
+    </div>
 
-  <div class="doc-card fade-in" style="animation-delay: 0.2s;">
-    <h2 class="title is-3"><i class="fas fa-play-circle" style="color: #f59e0b; margin-right: 10px;"></i>2. Running a Simulation</h2>
-    <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Execute the main script to start a basic 2-node simulation with random latency and packet loss:</p>
-    <pre><code>python main.py</code></pre>
-    <br>
-    <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Or use an advanced custom YAML configuration:</p>
-    <pre><code>python main.py --config configs/edge_cloud_hybrid.yaml</code></pre>
-  </div>
+    <div class="info-card fade-in" style="animation-delay: 0.2s;">
+      <h2 class="title is-3"><i class="fas fa-play-circle" style="color: #f59e0b; margin-right: 10px;"></i>2. Running a Simulation</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Execute the main script to start a basic 2-node simulation with random latency and packet loss:</p>
+      <pre><code>python main.py</code></pre>
+      <br>
+      <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Or use an advanced custom YAML configuration:</p>
+      <pre><code>python main.py --config configs/edge_cloud_hybrid.yaml</code></pre>
+    </div>
 
-  <div class="doc-card fade-in" style="animation-delay: 0.3s;">
-    <h2 class="title is-3"><i class="fas fa-quote-right" style="color: #8b5cf6; margin-right: 10px;"></i>3. Citation</h2>
-    <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">If you use DDLSim-Lab in your academic work, please use the following BibTeX citation:</p>
-    <pre><code>@software{truby2025ddlsimlab,
+    <div class="info-card fade-in" style="animation-delay: 0.3s;">
+      <h2 class="title is-3"><i class="fas fa-quote-right" style="color: #8b5cf6; margin-right: 10px;"></i>3. Citation</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">If you use DDLSim-Lab in your academic work, please use the following BibTeX citation:</p>
+      <pre><code>@software{truby2025ddlsimlab,
   author = {Truby, Kaitlyn Brishae},
   title = {DDLSim-Lab: Open-Source Research Platform for Distributed Deep Learning Systems},
   year = {2025},
@@ -76,19 +131,43 @@ pip install -r requirements.txt</code></pre>
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/ktruby-oss/DDLSim-Lab}}
 }</code></pre>
-  </div>
+    </div>
 
-  <div class="has-text-centered fade-in" style="animation-delay: 0.4s; margin-top: 3rem;">
-    <a href="https://github.com/ktruby-oss/DDLSim-Lab/tree/main/docs" target="_blank" class="button is-primary is-large is-rounded" style="padding: 0 40px; box-shadow: 0 10px 20px rgba(41, 98, 255, 0.3);">
-      <span class="icon"><i class="fab fa-github"></i></span>
-      <span>View Full Docs on GitHub</span>
-    </a>
+    <div class="has-text-centered fade-in" style="animation-delay: 0.4s; margin-top: 3rem;">
+      <a href="https://github.com/ktruby-oss/DDLSim-Lab/tree/main/docs" target="_blank" class="button is-primary is-large is-rounded" style="padding: 0 40px; box-shadow: 0 10px 20px rgba(41, 98, 255, 0.3);">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>View Full Docs on GitHub</span>
+      </a>
+    </div>
   </div>
-</div>
+</section>
 
-<footer>
-  © 2026 DDLSim-Lab. All rights reserved.
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>© 2026 DDLSim-Lab. All rights reserved.</p>
+  </div>
 </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+      // Add a click event on each of them
+      $navbarBurgers.forEach(el => {
+        el.addEventListener('click', () => {
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
