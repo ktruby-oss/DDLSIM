@@ -1,6 +1,6 @@
 # DDLSim-Lab Project Website
 
-This repository hosts the official project website and documentation for **DDLSim-Lab**, an open-source research platform designed to simulate, analyze, and optimize distributed deep learning systems.
+This repository hosts the official project website and documentation for **DDLSim-Lab**, an open-source research project designed to simulate, analyze, and optimize distributed deep learning systems.
 
 ## 🌐 Live Website
 **[Visit the DDLSim-Lab Website](https://ktruby-oss.github.io/DDLSIM/)**
