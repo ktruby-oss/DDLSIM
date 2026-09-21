@@ -7,35 +7,47 @@
   <title>DDLSim-Lab | Distributed Deep Learning Systems Research</title>
 
   <meta name="description"
-        content="DDLSim-Lab is an open-source research environment for studying distributed deep learning, heterogeneous infrastructure, network behavior, scheduling, and fault tolerance.">
+    content="DDLSim-Lab is an open-source research environment for distributed deep learning systems, infrastructure, networking, scheduling and fault-tolerance research.">
 
-  <meta name="theme-color" content="#0b1220">
+  <meta name="theme-color" content="#080f1d">
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
 
   <style>
+
     :root {
-      --bg: #f7f9fc;
+      --navy: #080f1d;
+      --navy-2: #0d1729;
+      --navy-3: #111e34;
+
+      --blue: #2563eb;
+      --blue-light: #60a5fa;
+      --cyan: #22d3ee;
+
+      --bg: #f5f7fb;
       --surface: #ffffff;
-      --surface-dark: #111827;
-      --navy: #0b1220;
-      --navy-2: #111c31;
+
       --text: #172033;
       --muted: #64748b;
-      --border: #e5eaf1;
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --cyan: #06b6d4;
-      --green: #16a34a;
-      --radius: 16px;
-      --shadow: 0 12px 35px rgba(15, 23, 42, .07);
+
+      --border: #e2e8f0;
+
+      --green: #22c55e;
+
+      --radius: 18px;
+
+      --shadow:
+        0 18px 45px rgba(15, 23, 42, .08);
     }
 
     * {
@@ -44,6 +56,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 80px;
     }
 
     body {
@@ -51,21 +64,49 @@
       background: var(--bg);
       color: var(--text);
       font-family: "Inter", sans-serif;
-      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
     }
 
     a {
-      transition: all .2s ease;
+      transition: .2s ease;
     }
 
-    /* =========================
-       NAVIGATION
-       ========================= */
+    /* ========================================
+       READING PROGRESS
+    ======================================== */
+
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      z-index: 9999;
+      background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--cyan)
+      );
+    }
+
+    /* ========================================
+       NAVBAR
+    ======================================== */
 
     .site-navbar {
-      background: rgba(11, 18, 32, .96);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 9000;
+
+      background: rgba(8,15,29,.88);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .site-navbar .navbar-item {
@@ -76,160 +117,326 @@
     .site-navbar .navbar-item:hover,
     .site-navbar .navbar-item.is-active {
       color: #fff !important;
-      background: rgba(255,255,255,.07) !important;
+      background: rgba(255,255,255,.06) !important;
     }
 
     .brand {
       gap: 10px;
       color: #fff !important;
       font-weight: 800 !important;
-      letter-spacing: -.02em;
+      letter-spacing: -.03em;
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
+      width: 35px;
+      height: 35px;
+
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 9px;
-      background: linear-gradient(135deg, var(--primary), var(--cyan));
-      color: #fff;
-      box-shadow: 0 6px 18px rgba(37,99,235,.3);
+
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--blue),
+          var(--cyan)
+        );
+
+      box-shadow:
+        0 8px 22px rgba(37,99,235,.3);
     }
 
     .github-nav {
       margin-left: 8px;
       border: 1px solid rgba(255,255,255,.12);
-      border-radius: 8px;
+      border-radius: 9px;
     }
 
-    .navbar-burger {
-      color: #fff !important;
-    }
-
-    /* =========================
+    /* ========================================
        HERO
-       ========================= */
+    ======================================== */
 
-    .hero-section {
+    .hero {
       position: relative;
       overflow: hidden;
+
       background:
-        radial-gradient(circle at 85% 20%, rgba(37,99,235,.25), transparent 28%),
-        radial-gradient(circle at 15% 80%, rgba(6,182,212,.12), transparent 28%),
-        linear-gradient(135deg, var(--navy), var(--navy-2));
-      color: #fff;
+        radial-gradient(
+          circle at 80% 15%,
+          rgba(37,99,235,.28),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 15% 80%,
+          rgba(34,211,238,.12),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          var(--navy),
+          var(--navy-2)
+        );
     }
 
-    .hero-section::before {
-      content: "";
+    .hero-grid {
       position: absolute;
       inset: 0;
-      opacity: .22;
+
+      opacity: .16;
+
       background-image:
-        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+        linear-gradient(
+          rgba(255,255,255,.06) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.06) 1px,
+          transparent 1px
+        );
+
       background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black, transparent);
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent
+        );
+    }
+
+    /* network decoration */
+
+    .network {
+      position: absolute;
+      inset: 0;
       pointer-events: none;
     }
 
-    .hero-content {
+    .node {
+      position: absolute;
+
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--cyan);
+
+      box-shadow:
+        0 0 18px rgba(34,211,238,.8);
+
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .node:nth-child(1) {
+      top: 24%;
+      right: 15%;
+    }
+
+    .node:nth-child(2) {
+      top: 42%;
+      right: 27%;
+      animation-delay: .7s;
+    }
+
+    .node:nth-child(3) {
+      top: 62%;
+      right: 12%;
+      animation-delay: 1.3s;
+    }
+
+    .node:nth-child(4) {
+      top: 31%;
+      left: 12%;
+      animation-delay: 1.8s;
+    }
+
+    .node:nth-child(5) {
+      top: 72%;
+      left: 20%;
+      animation-delay: 2.2s;
+    }
+
+    @keyframes pulse {
+      0%,100% {
+        opacity: .4;
+        transform: scale(.8);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.35);
+      }
+    }
+
+    .hero-body {
       position: relative;
       z-index: 2;
-      padding: 6.5rem 1.5rem 5.5rem;
+
+      padding:
+        7rem
+        1.25rem
+        6rem;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border: 1px solid rgba(96,165,250,.25);
+      gap: 9px;
+
+      padding: 7px 13px;
+
+      border:
+        1px solid
+        rgba(96,165,250,.25);
+
       border-radius: 999px;
-      background: rgba(37,99,235,.10);
+
+      background:
+        rgba(37,99,235,.1);
+
       color: #93c5fd;
-      font-family: "JetBrains Mono", monospace;
-      font-size: .78rem;
-      font-weight: 500;
-      letter-spacing: .02em;
+
+      font-family:
+        "JetBrains Mono",
+        monospace;
+
+      font-size: .76rem;
+      letter-spacing: .06em;
     }
 
     .status-dot {
       width: 7px;
       height: 7px;
+
       border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34,197,94,.12);
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(34,197,94,.12);
     }
 
     .hero-title {
-      max-width: 920px;
-      margin: 1.4rem auto 1.2rem;
+      max-width: 950px;
+
+      margin:
+        1.5rem
+        auto
+        1.2rem;
+
       color: #fff !important;
-      font-size: clamp(2.6rem, 6vw, 5.2rem) !important;
+
+      font-size:
+        clamp(
+          2.7rem,
+          7vw,
+          5.5rem
+        ) !important;
+
       line-height: 1.02 !important;
-      letter-spacing: -.055em;
+
+      letter-spacing: -.065em;
+
       font-weight: 800 !important;
     }
 
     .hero-title .accent {
-      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      background:
+        linear-gradient(
+          90deg,
+          #60a5fa,
+          #22d3ee
+        );
+
       -webkit-background-clip: text;
       background-clip: text;
+
       color: transparent;
     }
 
     .hero-subtitle {
       max-width: 760px;
-      margin: 0 auto;
-      color: #aab8ca !important;
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      line-height: 1.75;
+
+      margin: auto;
+
+      color: #aebbd0 !important;
+
+      font-size:
+        clamp(
+          1rem,
+          2vw,
+          1.2rem
+        );
+
+      line-height: 1.8;
     }
 
     .hero-actions {
-      margin-top: 2.2rem;
       display: flex;
+
       justify-content: center;
+
       flex-wrap: wrap;
+
       gap: 12px;
+
+      margin-top: 2.3rem;
     }
 
     .hero-actions .button {
-      min-height: 48px;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
+      min-height: 50px;
+
+      padding:
+        0 1.3rem;
+
+      border-radius: 11px;
+
       font-weight: 600;
-      border-radius: 10px;
     }
 
     .button-primary {
-      background: var(--primary) !important;
+      background: var(--blue) !important;
       color: #fff !important;
       border: none !important;
-      box-shadow: 0 8px 24px rgba(37,99,235,.25);
+
+      box-shadow:
+        0 10px 30px
+        rgba(37,99,235,.3);
     }
 
     .button-primary:hover {
-      background: var(--primary-dark) !important;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+
+      background:
+        #1d4ed8 !important;
     }
 
     .button-ghost {
       color: #e2e8f0 !important;
-      background: rgba(255,255,255,.05) !important;
-      border: 1px solid rgba(255,255,255,.13) !important;
+
+      background:
+        rgba(255,255,255,.05) !important;
+
+      border:
+        1px solid
+        rgba(255,255,255,.14) !important;
     }
 
     .button-ghost:hover {
-      background: rgba(255,255,255,.1) !important;
+      background:
+        rgba(255,255,255,.1) !important;
     }
 
     .hero-meta {
-      margin-top: 2.2rem;
+      margin-top: 2rem;
+
       color: #718096;
+
       font-size: .9rem;
     }
 
@@ -237,227 +444,575 @@
       color: #cbd5e1;
     }
 
-    /* =========================
-       STATS
-       ========================= */
+    /* ========================================
+       QUICK NAV
+    ======================================== */
 
-    .stats-wrap {
+    .quick-nav-wrap {
       position: relative;
-      z-index: 5;
-      margin-top: -42px;
+      z-index: 10;
+
+      margin-top: -30px;
     }
 
-    .stats-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+    .quick-nav {
+      display: flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      overflow-x: auto;
+
+      padding: 7px;
+
+      background: #fff;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 13px;
+
       box-shadow: var(--shadow);
-      padding: 1.4rem;
+
+      scrollbar-width: none;
     }
 
-    .stat {
-      padding: .5rem 1.25rem;
+    .quick-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-nav a {
+      flex: 0 0 auto;
+
+      padding:
+        9px
+        14px;
+
+      border-radius: 8px;
+
+      color: #64748b;
+
+      font-size: .8rem;
+
+      font-weight: 600;
+    }
+
+    .quick-nav a:hover,
+    .quick-nav a.active {
+      color: var(--blue);
+
+      background:
+        #eff6ff;
+    }
+
+    /* ========================================
+       PROJECT SIGNALS
+    ======================================== */
+
+    .signals {
+      margin-top: 1.5rem;
+    }
+
+    .signals-card {
+      padding: 1rem;
+
+      background: #fff;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
+    }
+
+    .signal {
       text-align: center;
+
+      padding: 1rem;
     }
 
-    .stat-number {
+    .signal-value {
       display: block;
+
       color: var(--text);
-      font-size: 1.45rem;
+
+      font-size: 1.25rem;
+
       font-weight: 800;
+
       letter-spacing: -.03em;
     }
 
-    .stat-label {
+    .signal-label {
       display: block;
-      margin-top: 3px;
+
+      margin-top: 5px;
+
       color: var(--muted);
-      font-size: .78rem;
+
+      font-size: .75rem;
     }
 
-    /* =========================
-       SECTIONS
-       ========================= */
+    /* ========================================
+       SECTION
+    ======================================== */
 
     .section-block {
-      padding: 5.5rem 1.5rem;
-    }
-
-    .section-block.compact {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+      padding:
+        5.5rem
+        1.25rem;
     }
 
     .section-kicker {
       margin-bottom: .65rem;
-      color: var(--primary);
-      font-family: "JetBrains Mono", monospace;
-      font-size: .78rem;
+
+      color: var(--blue);
+
+      font-family:
+        "JetBrains Mono",
+        monospace;
+
+      font-size: .76rem;
+
       font-weight: 600;
-      text-transform: uppercase;
+
       letter-spacing: .08em;
+
+      text-transform: uppercase;
     }
 
     .section-title {
       color: var(--text) !important;
-      font-size: clamp(1.9rem, 4vw, 2.8rem) !important;
-      line-height: 1.15 !important;
-      letter-spacing: -.04em;
+
+      font-size:
+        clamp(
+          2rem,
+          4vw,
+          3rem
+        ) !important;
+
+      line-height: 1.12 !important;
+
+      letter-spacing: -.05em;
+
       font-weight: 800 !important;
     }
 
     .section-description {
-      max-width: 720px;
+      max-width: 730px;
+
       color: var(--muted);
+
       line-height: 1.8;
-      font-size: 1.02rem;
     }
 
-    /* =========================
+    /* ========================================
        OVERVIEW
-       ========================= */
+    ======================================== */
 
     .overview-card {
       height: 100%;
+
       padding: 2rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
+
+      background: #fff;
+
+      border:
+        1px solid
+        var(--border);
+
       border-radius: var(--radius);
+
       box-shadow: var(--shadow);
     }
 
     .overview-card p {
       color: #475569;
+
       line-height: 1.85;
     }
 
     .research-note {
       height: 100%;
+
       padding: 2rem;
+
       border-radius: var(--radius);
-      background: linear-gradient(145deg, #0f172a, #162238);
-      color: #fff;
-      box-shadow: 0 15px 40px rgba(15,23,42,.15);
+
+      background:
+        linear-gradient(
+          145deg,
+          #0d1729,
+          #14213a
+        );
+
+      box-shadow:
+        0 20px 50px
+        rgba(15,23,42,.15);
     }
 
-    .research-note .icon-box {
+    .icon-box {
       width: 46px;
       height: 46px;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       margin-bottom: 1.2rem;
+
       border-radius: 12px;
-      background: rgba(96,165,250,.12);
+
+      background:
+        rgba(96,165,250,.12);
+
       color: #60a5fa;
     }
 
     .research-note h3 {
       color: #fff;
+
       font-size: 1.35rem;
+
       font-weight: 700;
     }
 
     .research-note p {
       color: #a8b4c7;
+
       line-height: 1.75;
     }
 
-    .mono-line {
+    .terminal {
       margin-top: 1.4rem;
-      padding: .8rem 1rem;
-      overflow-x: auto;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 9px;
-      background: rgba(0,0,0,.18);
+
+      padding: 1rem;
+
+      border-radius: 10px;
+
+      background: #070c15;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
       color: #93c5fd;
-      font-family: "JetBrains Mono", monospace;
-      font-size: .76rem;
+
+      font-family:
+        "JetBrains Mono",
+        monospace;
+
+      font-size: .75rem;
+
+      overflow-x: auto;
     }
 
-    /* =========================
-       RESEARCH AREAS
-       ========================= */
+    .terminal span {
+      color: #22d3ee;
+    }
 
-    .research-card {
+    /* ========================================
+       RESEARCH MODULES
+    ======================================== */
+
+    .module-card {
       height: 100%;
-      padding: 1.7rem;
+
+      padding: 1.6rem;
+
       background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 15px;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
     }
 
-    .research-card:hover {
-      transform: translateY(-4px);
+    .module-card:hover {
+      transform: translateY(-5px);
+
       border-color: #cbd5e1;
-      box-shadow: 0 18px 35px rgba(15,23,42,.08);
+
+      box-shadow:
+        0 18px 38px
+        rgba(15,23,42,.08);
     }
 
-    .research-icon {
-      width: 44px;
-      height: 44px;
+    .module-icon {
+      width: 45px;
+      height: 45px;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.1rem;
+
+      margin-bottom: 1rem;
+
       border-radius: 11px;
+
       background: #eff6ff;
-      color: var(--primary);
+
+      color: var(--blue);
     }
 
-    .research-card h3 {
-      margin-bottom: .65rem;
+    .module-card h3 {
+      margin-bottom: .6rem;
+
       color: var(--text);
-      font-size: 1.1rem;
+
+      font-size: 1.05rem;
+
       font-weight: 700;
     }
 
-    .research-card p {
+    .module-card p {
       margin: 0;
+
       color: var(--muted);
+
       line-height: 1.7;
-      font-size: .93rem;
+
+      font-size: .9rem;
     }
 
-    /* =========================
-       BARE METAL
-       ========================= */
+    /* ========================================
+       WORKFLOW
+    ======================================== */
 
-    .infrastructure {
+    .workflow {
       background: #eef2f7;
     }
 
-    .infra-panel {
+    .workflow-step {
+      position: relative;
+
+      height: 100%;
+
+      padding: 1.5rem;
+
       background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 15px;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      margin-bottom: 1rem;
+
+      border-radius: 9px;
+
+      background: #eff6ff;
+
+      color: var(--blue);
+
+      font-family:
+        "JetBrains Mono",
+        monospace;
+
+      font-size: .75rem;
+
+      font-weight: 600;
+    }
+
+    .workflow-step h3 {
+      margin-bottom: .5rem;
+
+      font-size: 1rem;
+
+      font-weight: 700;
+    }
+
+    .workflow-step p {
+      color: var(--muted);
+
+      line-height: 1.7;
+
+      font-size: .88rem;
+    }
+
+    /* ========================================
+       ARCHITECTURE
+    ======================================== */
+
+    .architecture {
+      padding:
+        5.5rem
+        1.25rem;
+    }
+
+    .architecture-box {
+      position: relative;
+
+      padding: 2rem;
+
       overflow: hidden;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0b1220,
+          #15243e
+        );
+
+      box-shadow:
+        0 25px 60px
+        rgba(15,23,42,.18);
+    }
+
+    .architecture-box::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      opacity: .12;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.08) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.08) 1px,
+          transparent 1px
+        );
+
+      background-size: 35px 35px;
+    }
+
+    .architecture-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .arch-flow {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 12px;
+
+      margin-top: 2rem;
+    }
+
+    .arch-node {
+      position: relative;
+
+      padding: 1.3rem 1rem;
+
+      text-align: center;
+
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
+      border-radius: 12px;
+
+      background:
+        rgba(255,255,255,.04);
+    }
+
+    .arch-node i {
+      margin-bottom: .7rem;
+
+      color: #60a5fa;
+
+      font-size: 1.2rem;
+    }
+
+    .arch-node strong {
+      display: block;
+
+      color: #e2e8f0;
+
+      font-size: .85rem;
+    }
+
+    .arch-node small {
+      display: block;
+
+      margin-top: .3rem;
+
+      color: #718096;
+
+      font-size: .68rem;
+    }
+
+    /* ========================================
+       INFRASTRUCTURE
+    ======================================== */
+
+    .infra {
+      background: #f8fafc;
+    }
+
+    .infra-panel {
+      overflow: hidden;
+
+      background: #fff;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: var(--radius);
+
       box-shadow: var(--shadow);
     }
 
-    .infra-visual {
+    .infra-image {
       min-height: 340px;
-      position: relative;
+
       background:
-        linear-gradient(rgba(8,15,28,.72), rgba(8,15,28,.86)),
-        url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=85&w=1200")
+        linear-gradient(
+          rgba(8,15,29,.7),
+          rgba(8,15,29,.88)
+        ),
+        url(
+          "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=85&w=1200"
+        )
         center/cover;
+
       display: flex;
+
       align-items: flex-end;
+
       padding: 2rem;
     }
 
-    .infra-label {
-      color: #93c5fd;
-      font-family: "JetBrains Mono", monospace;
-      font-size: .76rem;
-      margin-bottom: .4rem;
-    }
-
-    .infra-visual h3 {
+    .infra-image h3 {
       color: #fff;
+
       font-size: 1.7rem;
+
       font-weight: 800;
     }
 
@@ -467,6 +1022,7 @@
 
     .infra-content p {
       color: var(--muted);
+
       line-height: 1.8;
     }
 
@@ -476,200 +1032,413 @@
 
     .infra-list li {
       display: flex;
+
       gap: 12px;
+
       margin-bottom: 1rem;
+
       color: #475569;
+
       line-height: 1.6;
     }
 
     .infra-list i {
       margin-top: 4px;
+
       color: var(--green);
     }
 
-    /* =========================
-       OPEN SOURCE CTA
-       ========================= */
+    /* ========================================
+       CTA
+    ======================================== */
 
     .cta {
-      padding: 5rem 1.5rem;
+      padding:
+        5.5rem
+        1.25rem;
+
       background:
-        radial-gradient(circle at 80% 20%, rgba(37,99,235,.28), transparent 30%),
-        linear-gradient(135deg, #0b1220, #14213a);
-      color: #fff;
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(37,99,235,.25),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #080f1d,
+          #14213a
+        );
     }
 
     .cta h2 {
       color: #fff;
-      font-size: clamp(2rem, 4vw, 3rem);
+
+      font-size:
+        clamp(
+          2rem,
+          4vw,
+          3.2rem
+        );
+
       font-weight: 800;
-      letter-spacing: -.04em;
+
+      letter-spacing: -.05em;
     }
 
     .cta p {
       max-width: 680px;
-      margin: 1rem auto 0;
+
+      margin:
+        1rem
+        auto
+        0;
+
       color: #aebbd0;
-      line-height: 1.75;
+
+      line-height: 1.8;
     }
 
-    /* =========================
+    /* ========================================
        FOOTER
-       ========================= */
+    ======================================== */
 
     footer {
-      background: #080d18;
+      background: #070c15;
+
       color: #64748b;
-      padding: 2.8rem 1.5rem;
-      border-top: 1px solid rgba(255,255,255,.06);
+
+      padding:
+        3rem
+        1.25rem;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.06);
     }
 
     .footer-brand {
       color: #e2e8f0;
+
       font-weight: 700;
     }
 
     .footer-links a {
       color: #94a3b8;
+
       margin-left: 1rem;
-      font-size: .88rem;
+
+      font-size: .85rem;
     }
 
     .footer-links a:hover {
       color: #fff;
     }
 
-    .footer-bottom {
-      margin-top: 1.8rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid rgba(255,255,255,.06);
-      font-size: .78rem;
+    /* ========================================
+       BACK TO TOP
+    ======================================== */
+
+    .back-top {
+      position: fixed;
+
+      right: 20px;
+      bottom: 20px;
+
+      width: 44px;
+      height: 44px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      z-index: 8000;
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      background: rgba(255,255,255,.95);
+
+      color: var(--text);
+
+      box-shadow:
+        0 10px 30px
+        rgba(15,23,42,.12);
+
+      opacity: 0;
+
+      transform: translateY(15px);
+
+      pointer-events: none;
     }
 
-    /* =========================
-       RESPONSIVE
-       ========================= */
+    .back-top.visible {
+      opacity: 1;
+
+      transform: translateY(0);
+
+      pointer-events: auto;
+    }
+
+    /* ========================================
+       MOBILE
+    ======================================== */
 
     @media (max-width: 768px) {
 
-      .hero-content {
-        padding: 5rem 1.1rem 4.5rem;
+      .hero-body {
+        padding:
+          5rem
+          1rem
+          4rem;
       }
 
       .hero-title {
-        font-size: 2.65rem !important;
+        font-size: 2.7rem !important;
       }
 
-      .stats-wrap {
-        margin-top: -25px;
+      .hero-subtitle {
+        font-size: .98rem;
+        line-height: 1.7;
       }
 
-      .stats-card {
-        padding: 1rem .5rem;
+      .hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        max-width: 390px;
+
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .stat {
-        padding: .65rem .25rem;
+      .hero-actions .button {
+        width: 100%;
       }
 
-      .stat-number {
-        font-size: 1.1rem;
+      .quick-nav-wrap {
+        margin-top: -20px;
       }
 
-      .stat-label {
+      .signals-card {
+        padding: .5rem;
+      }
+
+      /*
+        IMPORTANT:
+        Mobile is now 2x2 instead of
+        four cramped columns.
+      */
+
+      .signals-card .columns {
+        display: grid;
+
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .signal {
+        padding: .85rem .4rem;
+
+        border-bottom:
+          1px solid
+          var(--border);
+      }
+
+      .signal:nth-child(odd) {
+        border-right:
+          1px solid
+          var(--border);
+      }
+
+      .signal:nth-last-child(-n+2) {
+        border-bottom: none;
+      }
+
+      .signal-value {
+        font-size: 1rem;
+      }
+
+      .signal-label {
         font-size: .68rem;
       }
 
       .section-block {
-        padding: 4rem 1.1rem;
+        padding:
+          4rem
+          1rem;
       }
 
-      .infra-visual {
-        min-height: 260px;
+      .section-title {
+        font-size: 2rem !important;
+      }
+
+      .overview-card,
+      .research-note,
+      .infra-content {
+        padding: 1.45rem;
+      }
+
+      .arch-flow {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .infra-image {
+        min-height: 250px;
       }
 
       .footer-links {
-        margin-top: 1rem;
+        margin-top: 1.2rem;
+
+        text-align: left !important;
       }
 
       .footer-links a {
         display: inline-block;
-        margin: .25rem .6rem 0 0;
+
+        margin:
+          .3rem
+          .7rem
+          .3rem
+          0;
+      }
+
+      .back-top {
+        right: 14px;
+        bottom: 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+
+      .hero-title {
+        font-size: 2.35rem !important;
+      }
+
+      .arch-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-nav a {
+        padding:
+          8px
+          11px;
+
+        font-size: .72rem;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
         animation-duration: .01ms !important;
+
         animation-iteration-count: 1 !important;
+
         transition-duration: .01ms !important;
+
         scroll-behavior: auto !important;
       }
     }
+
   </style>
 </head>
 
+
 <body>
 
-<!-- =========================
-     NAVIGATION
-     ========================= -->
+<!-- Reading progress -->
+<div
+  class="reading-progress"
+  id="readingProgress">
+</div>
 
-<nav class="navbar site-navbar" role="navigation" aria-label="Main navigation">
+
+<!-- ========================================
+     NAVIGATION
+======================================== -->
+
+<nav
+  class="navbar site-navbar"
+  role="navigation"
+  aria-label="Main navigation">
 
   <div class="container">
 
     <div class="navbar-brand">
 
-      <a class="navbar-item brand" href="index.html">
+      <a
+        class="navbar-item brand"
+        href="index.html">
+
         <span class="brand-mark">
           <i class="fas fa-microchip"></i>
         </span>
+
         <span>DDLSim-Lab</span>
+
       </a>
 
       <a
         role="button"
         class="navbar-burger"
-        aria-label="menu"
+        aria-label="Open navigation"
         aria-expanded="false"
         data-target="mainNavigation">
 
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+        <span></span>
+        <span></span>
+        <span></span>
 
       </a>
 
     </div>
 
-    <div id="mainNavigation" class="navbar-menu">
+
+    <div
+      id="mainNavigation"
+      class="navbar-menu">
 
       <div class="navbar-end">
 
-        <a class="navbar-item is-active" href="index.html">
+        <a
+          class="navbar-item is-active"
+          href="#top">
           Home
         </a>
 
-        <a class="navbar-item" href="about.html">
+        <a
+          class="navbar-item"
+          href="about.html">
           About
         </a>
 
-        <a class="navbar-item" href="research.html">
+        <a
+          class="navbar-item"
+          href="research.html">
           Research
         </a>
 
-        <a class="navbar-item" href="documentation.html">
-          Documentation
+        <a
+          class="navbar-item"
+          href="documentation.html">
+          Docs
         </a>
 
-        <a class="navbar-item" href="blog.html">
+        <a
+          class="navbar-item"
+          href="blog.html">
           Blog
         </a>
 
-        <a class="navbar-item" href="contact.html">
+        <a
+          class="navbar-item"
+          href="contact.html">
           Contact
         </a>
 
@@ -696,31 +1465,60 @@
 </nav>
 
 
-<!-- =========================
+<main id="top">
+
+
+<!-- ========================================
      HERO
-     ========================= -->
+======================================== -->
 
-<section class="hero-section">
+<section class="hero">
 
-  <div class="hero-content">
+  <div class="hero-grid"></div>
+
+  <div class="network">
+
+    <span class="node"></span>
+    <span class="node"></span>
+    <span class="node"></span>
+    <span class="node"></span>
+    <span class="node"></span>
+
+  </div>
+
+
+  <div class="hero-body">
 
     <div class="container has-text-centered">
 
       <span class="eyebrow">
+
         <span class="status-dot"></span>
+
         OPEN-SOURCE RESEARCH ENVIRONMENT
+
       </span>
 
+
       <h1 class="hero-title">
+
         Distributed deep learning,
-        <span class="accent">studied at system scale.</span>
+        <span class="accent">
+          studied at system scale.
+        </span>
+
       </h1>
 
+
       <p class="hero-subtitle">
-        DDLSim-Lab provides a reproducible environment for studying
-        distributed deep learning across heterogeneous infrastructure,
-        network conditions, scheduling strategies, and failure scenarios.
+
+        DDLSim-Lab provides a reproducible environment
+        for studying distributed deep learning across
+        heterogeneous infrastructure, network conditions,
+        scheduling strategies, and failure scenarios.
+
       </p>
+
 
       <div class="hero-actions">
 
@@ -728,19 +1526,20 @@
           href="https://github.com/ktruby-oss/DDLSim-Lab"
           target="_blank"
           rel="noopener noreferrer"
-          class="button button-primary is-medium">
+          class="button button-primary">
 
           <span class="icon">
             <i class="fab fa-github"></i>
           </span>
 
-          <span>Explore the repository</span>
+          <span>Explore repository</span>
 
         </a>
 
+
         <a
           href="research.html"
-          class="button button-ghost is-medium">
+          class="button button-ghost">
 
           <span class="icon">
             <i class="fas fa-flask"></i>
@@ -752,10 +1551,17 @@
 
       </div>
 
+
       <div class="hero-meta">
-        Project lead: <strong>Kaitlyn Brishae Truby</strong>
+
+        Project lead:
+        <strong>Kaitlyn Brishae Truby</strong>
+
         &nbsp;·&nbsp;
-        Active research since <strong>2025</strong>
+
+        Active research since
+        <strong>2025</strong>
+
       </div>
 
     </div>
@@ -765,36 +1571,112 @@
 </section>
 
 
-<!-- =========================
-     PROJECT SNAPSHOT
-     ========================= -->
+<!-- ========================================
+     QUICK NAVIGATION
+======================================== -->
 
-<section class="stats-wrap">
+<div class="quick-nav-wrap">
 
   <div class="container">
 
-    <div class="stats-card">
+    <nav
+      class="quick-nav"
+      aria-label="Page sections">
+
+      <a
+        href="#overview"
+        class="active">
+        Overview
+      </a>
+
+      <a href="#modules">
+        Research
+      </a>
+
+      <a href="#workflow">
+        Workflow
+      </a>
+
+      <a href="#architecture">
+        Architecture
+      </a>
+
+      <a href="#infrastructure">
+        Infrastructure
+      </a>
+
+      <a href="#open-source">
+        Open Source
+      </a>
+
+    </nav>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================
+     PROJECT SIGNALS
+======================================== -->
+
+<section class="signals">
+
+  <div class="container">
+
+    <div class="signals-card">
 
       <div class="columns is-mobile is-gapless">
 
-        <div class="column stat">
-          <span class="stat-number">Open Source</span>
-          <span class="stat-label">Research model</span>
+        <div class="column signal">
+
+          <span class="signal-value">
+            Open Source
+          </span>
+
+          <span class="signal-label">
+            Research model
+          </span>
+
         </div>
 
-        <div class="column stat">
-          <span class="stat-number">Bare Metal</span>
-          <span class="stat-label">Infrastructure focus</span>
+
+        <div class="column signal">
+
+          <span class="signal-value">
+            Bare Metal
+          </span>
+
+          <span class="signal-label">
+            Infrastructure focus
+          </span>
+
         </div>
 
-        <div class="column stat">
-          <span class="stat-number">Edge → Cloud</span>
-          <span class="stat-label">Experiment scope</span>
+
+        <div class="column signal">
+
+          <span class="signal-value">
+            Edge → Cloud
+          </span>
+
+          <span class="signal-label">
+            Experiment scope
+          </span>
+
         </div>
 
-        <div class="column stat">
-          <span class="stat-number">Reproducible</span>
-          <span class="stat-label">Experimentation</span>
+
+        <div class="column signal">
+
+          <span class="signal-value">
+            Reproducible
+          </span>
+
+          <span class="signal-label">
+            Experimentation
+          </span>
+
         </div>
 
       </div>
@@ -806,11 +1688,13 @@
 </section>
 
 
-<!-- =========================
+<!-- ========================================
      OVERVIEW
-     ========================= -->
+======================================== -->
 
-<section class="section-block">
+<section
+  id="overview"
+  class="section-block">
 
   <div class="container">
 
@@ -823,43 +1707,53 @@
         </div>
 
         <h2 class="section-title">
-          A research environment built for distributed systems.
+          A research environment built
+          for distributed systems.
         </h2>
 
         <p class="section-description mt-4">
-          DDLSim-Lab is an open-source research project focused on
-          understanding how distributed deep learning systems behave
+
+          DDLSim-Lab is an open-source research
+          project focused on understanding how
+          distributed deep learning systems behave
           under realistic infrastructure constraints.
+
         </p>
+
 
         <div class="overview-card mt-5">
 
           <p>
-            The platform is designed to support experimentation with
-            large-scale, heterogeneous, and failure-prone environments.
-            Researchers can investigate algorithms, scheduling policies,
-            communication behavior, resource allocation, and fault-tolerance
-            techniques without depending exclusively on expensive dedicated
-            physical testbeds.
+
+            The platform is designed to support
+            experimentation with large-scale,
+            heterogeneous, and failure-prone
+            environments.
+
           </p>
 
           <p class="mt-4">
-            Rather than treating distributed training as an isolated
-            machine-learning problem, DDLSim-Lab approaches it as a
-            systems problem spanning compute, networking, orchestration,
-            and reliability.
+
+            Researchers can investigate algorithms,
+            scheduling policies, communication
+            behavior, resource allocation and
+            fault-tolerance techniques.
+
           </p>
 
         </div>
 
       </div>
 
+
       <div class="column is-5">
 
         <div class="research-note">
 
           <div class="icon-box">
+
             <i class="fas fa-network-wired"></i>
+
           </div>
 
           <h3>
@@ -867,13 +1761,29 @@
           </h3>
 
           <p class="mt-3">
-            Model the interaction between distributed workloads and the
-            infrastructure beneath them — from network conditions to
-            compute placement and failure behavior.
+
+            Study the interaction between
+            distributed workloads and the
+            infrastructure beneath them.
+
           </p>
 
-          <div class="mono-line">
-            workload → scheduler → network → nodes → telemetry
+
+          <div class="terminal">
+
+            <span>$</span>
+            workload →
+
+            <span>scheduler</span>
+            →
+
+            <span>network</span>
+            →
+
+            nodes →
+
+            telemetry
+
           </div>
 
         </div>
@@ -887,44 +1797,51 @@
 </section>
 
 
-<!-- =========================
-     RESEARCH AREAS
-     ========================= -->
+<!-- ========================================
+     RESEARCH MODULES
+======================================== -->
 
-<section class="section-block compact">
+<section
+  id="modules"
+  class="section-block">
 
   <div class="container">
 
     <div class="section-kicker">
-      02 / Research areas
+      02 / Research modules
     </div>
 
     <h2 class="section-title">
-      What the lab is designed to investigate
+      What the lab can investigate
     </h2>
 
     <p class="section-description mt-4">
-      The environment brings several system dimensions together so
-      experiments can examine their interactions rather than isolated
-      variables.
+
+      The environment brings several system
+      dimensions together so experiments can
+      examine their interaction.
+
     </p>
 
 
     <div class="columns is-multiline mt-5">
 
+
       <div class="column is-4">
 
-        <div class="research-card">
+        <div class="module-card">
 
-          <div class="research-icon">
+          <div class="module-icon">
             <i class="fas fa-project-diagram"></i>
           </div>
 
-          <h3>Distributed Training</h3>
+          <h3>
+            Distributed Training
+          </h3>
 
           <p>
-            Explore distributed deep learning workloads across multiple
-            compute nodes and heterogeneous environments.
+            Distributed deep learning workloads
+            across multiple compute nodes.
           </p>
 
         </div>
@@ -934,17 +1851,19 @@
 
       <div class="column is-4">
 
-        <div class="research-card">
+        <div class="module-card">
 
-          <div class="research-icon">
+          <div class="module-icon">
             <i class="fas fa-network-wired"></i>
           </div>
 
-          <h3>Network Behavior</h3>
+          <h3>
+            Network Behavior
+          </h3>
 
           <p>
-            Study latency, jitter, packet loss, bandwidth constraints,
-            and communication patterns affecting distributed workloads.
+            Latency, jitter, packet loss,
+            bandwidth and communication behavior.
           </p>
 
         </div>
@@ -954,17 +1873,19 @@
 
       <div class="column is-4">
 
-        <div class="research-card">
+        <div class="module-card">
 
-          <div class="research-icon">
+          <div class="module-icon">
             <i class="fas fa-calendar-alt"></i>
           </div>
 
-          <h3>Scheduling</h3>
+          <h3>
+            Scheduling
+          </h3>
 
           <p>
-            Investigate placement, scheduling, resource allocation,
-            and adaptive strategies for distributed workloads.
+            Placement, resource allocation and
+            adaptive scheduling strategies.
           </p>
 
         </div>
@@ -974,17 +1895,19 @@
 
       <div class="column is-4">
 
-        <div class="research-card">
+        <div class="module-card">
 
-          <div class="research-icon">
+          <div class="module-icon">
             <i class="fas fa-bolt"></i>
           </div>
 
-          <h3>Performance</h3>
+          <h3>
+            Performance
+          </h3>
 
           <p>
-            Evaluate scaling behavior and system performance under
-            changing workload and infrastructure conditions.
+            Scaling behavior and system performance
+            under changing conditions.
           </p>
 
         </div>
@@ -994,17 +1917,19 @@
 
       <div class="column is-4">
 
-        <div class="research-card">
+        <div class="module-card">
 
-          <div class="research-icon">
+          <div class="module-icon">
             <i class="fas fa-shield-alt"></i>
           </div>
 
-          <h3>Fault Tolerance</h3>
+          <h3>
+            Fault Tolerance
+          </h3>
 
           <p>
-            Experiment with failures, degraded nodes, unreliable links,
-            recovery strategies, and resilient system behavior.
+            Failure scenarios, recovery and
+            resilient distributed behavior.
           </p>
 
         </div>
@@ -1014,18 +1939,256 @@
 
       <div class="column is-4">
 
-        <div class="research-card">
+        <div class="module-card">
 
-          <div class="research-icon">
+          <div class="module-icon">
             <i class="fas fa-cloud"></i>
           </div>
 
-          <h3>Edge–Cloud Systems</h3>
+          <h3>
+            Edge–Cloud Systems
+          </h3>
 
           <p>
-            Examine distributed workloads spanning edge devices,
-            local resources, and cloud infrastructure.
+            Workloads spanning edge resources
+            and cloud infrastructure.
           </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================
+     WORKFLOW
+======================================== -->
+
+<section
+  id="workflow"
+  class="section-block workflow">
+
+  <div class="container">
+
+    <div class="section-kicker">
+      03 / Research workflow
+    </div>
+
+    <h2 class="section-title">
+      From experiment design to observation.
+    </h2>
+
+    <p class="section-description mt-4">
+
+      A simple research flow keeps experiments
+      understandable and reproducible.
+
+    </p>
+
+
+    <div class="columns is-multiline mt-5">
+
+
+      <div class="column is-3">
+
+        <div class="workflow-step">
+
+          <div class="step-number">
+            01
+          </div>
+
+          <h3>
+            Define workload
+          </h3>
+
+          <p>
+            Specify the distributed workload,
+            resources and experimental conditions.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="column is-3">
+
+        <div class="workflow-step">
+
+          <div class="step-number">
+            02
+          </div>
+
+          <h3>
+            Configure system
+          </h3>
+
+          <p>
+            Configure nodes, networking,
+            scheduling and infrastructure behavior.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="column is-3">
+
+        <div class="workflow-step">
+
+          <div class="step-number">
+            03
+          </div>
+
+          <h3>
+            Run experiment
+          </h3>
+
+          <p>
+            Execute the workload while observing
+            system and network behavior.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="column is-3">
+
+        <div class="workflow-step">
+
+          <div class="step-number">
+            04
+          </div>
+
+          <h3>
+            Analyze results
+          </h3>
+
+          <p>
+            Compare measurements and evaluate
+            the behavior of the system.
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================
+     ARCHITECTURE
+======================================== -->
+
+<section
+  id="architecture"
+  class="architecture">
+
+  <div class="container">
+
+    <div class="architecture-box">
+
+      <div class="architecture-content">
+
+        <div class="section-kicker">
+          04 / System architecture
+        </div>
+
+        <h2
+          class="section-title"
+          style="color:#fff !important;">
+
+          A systems view of the experiment.
+
+        </h2>
+
+        <p
+          class="section-description mt-4"
+          style="color:#94a3b8;">
+
+          The architecture connects workload,
+          orchestration, network behavior,
+          compute nodes and experiment telemetry.
+
+        </p>
+
+
+        <div class="arch-flow">
+
+
+          <div class="arch-node">
+
+            <i class="fas fa-brain"></i>
+
+            <strong>
+              Workload
+            </strong>
+
+            <small>
+              Deep learning
+            </small>
+
+          </div>
+
+
+          <div class="arch-node">
+
+            <i class="fas fa-sliders-h"></i>
+
+            <strong>
+              Scheduler
+            </strong>
+
+            <small>
+              Placement
+            </small>
+
+          </div>
+
+
+          <div class="arch-node">
+
+            <i class="fas fa-network-wired"></i>
+
+            <strong>
+              Network
+            </strong>
+
+            <small>
+              Communication
+            </small>
+
+          </div>
+
+
+          <div class="arch-node">
+
+            <i class="fas fa-server"></i>
+
+            <strong>
+              Compute Nodes
+            </strong>
+
+            <small>
+              Execution
+            </small>
+
+          </div>
+
 
         </div>
 
@@ -1038,11 +2201,13 @@
 </section>
 
 
-<!-- =========================
-     BARE METAL
-     ========================= -->
+<!-- ========================================
+     INFRASTRUCTURE
+======================================== -->
 
-<section class="section-block infrastructure">
+<section
+  id="infrastructure"
+  class="section-block infra">
 
   <div class="container">
 
@@ -1050,14 +2215,15 @@
 
       <div class="columns is-gapless is-vcentered">
 
+
         <div class="column is-5">
 
-          <div class="infra-visual">
+          <div class="infra-image">
 
             <div>
 
-              <div class="infra-label">
-                INFRASTRUCTURE / 03
+              <div class="section-kicker">
+                05 / Infrastructure
               </div>
 
               <h3>
@@ -1075,44 +2241,59 @@
 
           <div class="infra-content">
 
-            <div class="section-kicker">
-              Infrastructure fidelity
-            </div>
-
             <h2 class="section-title is-size-3">
-              When the infrastructure is part of the experiment.
+
+              When infrastructure
+              is part of the experiment.
+
             </h2>
 
+
             <p class="mt-4">
-              DDLSim-Lab is designed to support bare-metal deployments
-              when experiments require direct access to networking,
-              compute, and kernel-level behavior.
+
+              DDLSim-Lab is designed to support
+              bare-metal deployments when experiments
+              require direct access to networking,
+              compute and kernel-level behavior.
+
             </p>
+
 
             <ul class="infra-list">
 
               <li>
+
                 <i class="fas fa-check-circle"></i>
+
                 <span>
-                  Reduced virtualization overhead for performance-sensitive
-                  measurements.
+                  Reduced virtualization overhead
+                  for performance-sensitive measurements.
                 </span>
+
               </li>
 
-              <li>
-                <i class="fas fa-check-circle"></i>
-                <span>
-                  Direct access to network interfaces for realistic
-                  communication experiments.
-                </span>
-              </li>
 
               <li>
+
                 <i class="fas fa-check-circle"></i>
+
                 <span>
-                  Support for technologies such as SR-IOV and RDMA where
-                  the experimental environment requires them.
+                  Direct access to network interfaces
+                  for realistic communication experiments.
                 </span>
+
+              </li>
+
+
+              <li>
+
+                <i class="fas fa-check-circle"></i>
+
+                <span>
+                  Support for technologies such as
+                  SR-IOV and RDMA where required.
+                </span>
+
               </li>
 
             </ul>
@@ -1120,6 +2301,7 @@
           </div>
 
         </div>
+
 
       </div>
 
@@ -1130,28 +2312,34 @@
 </section>
 
 
-<!-- =========================
-     OPEN SOURCE CTA
-     ========================= -->
+<!-- ========================================
+     OPEN SOURCE
+======================================== -->
 
-<section class="cta">
+<section
+  id="open-source"
+  class="cta">
 
   <div class="container has-text-centered">
 
     <div class="section-kicker">
-      04 / Open research
+      06 / Open research
     </div>
 
     <h2>
-      Built to be inspected, reproduced, and extended.
+      Built to be inspected,
+      reproduced and extended.
     </h2>
 
     <p>
-      DDLSim-Lab is developed as an open-source research project.
-      Researchers and contributors can inspect the implementation,
-      reproduce experiments, propose improvements, and extend the
-      environment for new research questions.
+
+      DDLSim-Lab is developed as an open-source
+      research project. The implementation can
+      evolve with new experiments, research
+      questions and contributions.
+
     </p>
+
 
     <div class="hero-actions">
 
@@ -1159,25 +2347,26 @@
         href="https://github.com/ktruby-oss/DDLSim-Lab"
         target="_blank"
         rel="noopener noreferrer"
-        class="button button-primary is-medium">
+        class="button button-primary">
 
         <span class="icon">
           <i class="fab fa-github"></i>
         </span>
 
-        <span>View DDLSim-Lab on GitHub</span>
+        <span>View on GitHub</span>
 
       </a>
 
+
       <a
         href="documentation.html"
-        class="button button-ghost is-medium">
+        class="button button-ghost">
 
         <span class="icon">
           <i class="fas fa-book"></i>
         </span>
 
-        <span>Read the documentation</span>
+        <span>Documentation</span>
 
       </a>
 
@@ -1187,10 +2376,12 @@
 
 </section>
 
+</main>
 
-<!-- =========================
+
+<!-- ========================================
      FOOTER
-     ========================= -->
+======================================== -->
 
 <footer>
 
@@ -1204,27 +2395,50 @@
           DDLSim-Lab
         </div>
 
-        <div class="mt-2">
-          Open-source research infrastructure for distributed
-          deep learning systems.
-        </div>
+        <p class="mt-2">
+          Open-source research infrastructure
+          for distributed deep learning systems.
+        </p>
 
       </div>
 
+
       <div class="column has-text-right footer-links">
 
-        <a href="about.html">About</a>
-        <a href="research.html">Research</a>
-        <a href="documentation.html">Docs</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="research.html">
+          Research
+        </a>
+
+        <a href="documentation.html">
+          Docs
+        </a>
+
+        <a href="blog.html">
+          Blog
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
 
       </div>
 
     </div>
 
-    <div class="footer-bottom">
-      © 2026 DDLSim-Lab. Open-source research project.
+
+    <div class="mt-5 pt-4"
+         style="
+           border-top:1px solid rgba(255,255,255,.06);
+           font-size:.78rem;
+         ">
+
+      © 2026 DDLSim-Lab.
+      Open-source research project.
+
     </div>
 
   </div>
@@ -1232,36 +2446,325 @@
 </footer>
 
 
-<!-- =========================
-     MOBILE NAVIGATION
-     ========================= -->
+<!-- ========================================
+     BACK TO TOP
+======================================== -->
+
+<a
+  href="#top"
+  class="back-top"
+  id="backTop"
+  aria-label="Back to top">
+
+  <i class="fas fa-arrow-up"></i>
+
+</a>
+
+
+<!-- ========================================
+     JAVASCRIPT
+======================================== -->
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
 
-    const burgers = document.querySelectorAll(".navbar-burger");
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
 
-    burgers.forEach(function (burger) {
+    /* ===============================
+       MOBILE NAVIGATION
+    =============================== */
 
-      burger.addEventListener("click", function () {
+    const burgers =
+      document.querySelectorAll(
+        ".navbar-burger"
+      );
 
-        const targetId = burger.dataset.target;
-        const target = document.getElementById(targetId);
+    burgers.forEach(
+      function (burger) {
 
-        const active = burger.classList.toggle("is-active");
+        burger.addEventListener(
+          "click",
+          function () {
 
-        target.classList.toggle("is-active");
+            const targetId =
+              burger.dataset.target;
 
-        burger.setAttribute(
-          "aria-expanded",
-          active ? "true" : "false"
+            const target =
+              document.getElementById(
+                targetId
+              );
+
+            const active =
+              burger.classList.toggle(
+                "is-active"
+              );
+
+            target.classList.toggle(
+              "is-active"
+            );
+
+            document.body.classList.toggle(
+              "menu-open",
+              active
+            );
+
+            burger.setAttribute(
+              "aria-expanded",
+              active
+                ? "true"
+                : "false"
+            );
+
+          }
         );
 
-      });
+      }
+    );
 
-    });
 
-  });
+    /* ===============================
+       CLOSE MOBILE MENU AFTER CLICK
+    =============================== */
+
+    document
+      .querySelectorAll(
+        ".navbar-menu .navbar-item"
+      )
+      .forEach(
+        function (item) {
+
+          item.addEventListener(
+            "click",
+            function () {
+
+              document
+                .querySelectorAll(
+                  ".navbar-burger"
+                )
+                .forEach(
+                  b =>
+                    b.classList.remove(
+                      "is-active"
+                    )
+                );
+
+              document
+                .getElementById(
+                  "mainNavigation"
+                )
+                .classList.remove(
+                  "is-active"
+                );
+
+              document.body.classList.remove(
+                "menu-open"
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    /* ===============================
+       READING PROGRESS
+    =============================== */
+
+    const progress =
+      document.getElementById(
+        "readingProgress"
+      );
+
+    function updateProgress() {
+
+      const scrollTop =
+        window.scrollY;
+
+      const height =
+        document.documentElement
+          .scrollHeight -
+        window.innerHeight;
+
+      const percent =
+        height > 0
+          ? (scrollTop / height) * 100
+          : 0;
+
+      progress.style.width =
+        percent + "%";
+
+    }
+
+    window.addEventListener(
+      "scroll",
+      updateProgress,
+      { passive: true }
+    );
+
+
+    /* ===============================
+       BACK TO TOP
+    =============================== */
+
+    const backTop =
+      document.getElementById(
+        "backTop"
+      );
+
+    function updateBackTop() {
+
+      backTop.classList.toggle(
+        "visible",
+        window.scrollY > 600
+      );
+
+    }
+
+    window.addEventListener(
+      "scroll",
+      updateBackTop,
+      { passive: true }
+    );
+
+
+    /* ===============================
+       QUICK NAV ACTIVE STATE
+    =============================== */
+
+    const sections =
+      document.querySelectorAll(
+        "main section[id]"
+      );
+
+    const quickLinks =
+      document.querySelectorAll(
+        ".quick-nav a"
+      );
+
+    const observer =
+      new IntersectionObserver(
+        function (entries) {
+
+          entries.forEach(
+            function (entry) {
+
+              if (!entry.isIntersecting)
+                return;
+
+              quickLinks.forEach(
+                function (link) {
+
+                  link.classList.remove(
+                    "active"
+                  );
+
+                  if (
+                    link.getAttribute(
+                      "href"
+                    ) ===
+                    "#" + entry.target.id
+                  ) {
+
+                    link.classList.add(
+                      "active"
+                    );
+
+                  }
+
+                }
+              );
+
+            }
+          );
+
+        },
+        {
+          rootMargin:
+            "-35% 0px -55% 0px"
+        }
+      );
+
+
+    sections.forEach(
+      section =>
+        observer.observe(section)
+    );
+
+
+    /* ===============================
+       REVEAL ANIMATION
+    =============================== */
+
+    const revealElements =
+      document.querySelectorAll(
+        ".module-card, .workflow-step, .overview-card, .research-note, .infra-panel"
+      );
+
+    if (
+      !window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+    ) {
+
+      revealElements.forEach(
+        function (element) {
+
+          element.style.opacity = "0";
+
+          element.style.transform =
+            "translateY(18px)";
+
+          element.style.transition =
+            "opacity .6s ease, transform .6s ease";
+
+        }
+      );
+
+
+      const revealObserver =
+        new IntersectionObserver(
+          function (entries) {
+
+            entries.forEach(
+              function (entry) {
+
+                if (
+                  !entry.isIntersecting
+                )
+                  return;
+
+                entry.target.style.opacity =
+                  "1";
+
+                entry.target.style.transform =
+                  "translateY(0)";
+
+                revealObserver.unobserve(
+                  entry.target
+                );
+
+              }
+            );
+
+          },
+          {
+            threshold: .12
+          }
+        );
+
+
+      revealElements.forEach(
+        element =>
+          revealObserver.observe(element)
+      );
+
+    }
+
+  }
+);
+
 </script>
 
 </body>
