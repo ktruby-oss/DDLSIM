@@ -3,127 +3,2289 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>DDLSim-Lab | Documentation</title>
+
+  <meta
+    name="description"
+    content="DDLSim-Lab documentation, installation guide, simulation quick start, configuration examples, and citation information."
+  >
+
+  <meta name="theme-color" content="#0b1220">
+
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+    rel="stylesheet"
+  >
+
   <script defer src="static/js/fontawesome.all.min.js"></script>
+
   <style>
-    :root { --primary: #2962ff; --bg-light: #f4f6f8; --dark: #0f172a; }
-    body { background-color: var(--bg-light); font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-    .hero { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; }
-    .hero .title, .hero .subtitle { color: #fff; position: relative; }
-    .hero-banner { border-radius: 0; padding: 4rem 2rem; margin-bottom: 0; }
-    .hero-banner::after { content: ''; position: absolute; right: 0; top: 0; height: 100%; width: 50%; background: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800') center/cover; opacity: 0.15; mask-image: linear-gradient(to right, transparent, black); -webkit-mask-image: linear-gradient(to right, transparent, black); }
-    .hero-banner .title, .hero-banner .subtitle { position: relative; z-index: 2; }
-    .info-card { background: #fff; border-radius: 12px; padding: 2.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 2rem; }
-    pre { background-color: #1e293b !important; color: #f8fafc !important; border-radius: 8px; padding: 1.5rem !important; }
-    code { color: #38bdf8 !important; }
-    footer { margin-top: auto; padding: 2rem; text-align: center; color: #64748b; font-size: 0.9rem; border-top: 1px solid #e2e8f0; }
-    @media (max-width: 768px) {
-      .hero-banner { padding: 3rem 1rem; }
-      .info-card { padding: 1.5rem; }
+    :root {
+      --primary: #2962ff;
+      --primary-dark: #1746c7;
+      --accent: #60a5fa;
+
+      --dark: #0b1220;
+      --dark-2: #111827;
+
+      --text: #172033;
+      --muted: #64748b;
+
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+
+      --border: #e2e8f0;
+
+      --green: #10b981;
+      --orange: #f59e0b;
+      --purple: #8b5cf6;
+
+      --radius: 18px;
+
+      --shadow-sm:
+        0 8px 25px rgba(15, 23, 42, .06);
+
+      --shadow-md:
+        0 18px 50px rgba(15, 23, 42, .10);
     }
-    /* Additional responsiveness and touch improvements */
-    @media (hover: hover) {
-      .info-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+    * {
+      box-sizing: border-box;
     }
-    .info-card:active { transform: translateY(-2px); }
-    /* Smooth scroll */
-    html { scroll-behavior: smooth; }
-    /* Reduce motion for users who prefer it */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 10% 0%,
+          rgba(41, 98, 255, .07),
+          transparent 28%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family: "Inter", sans-serif;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      transition:
+        color .2s ease,
+        background-color .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    .site-navbar {
+      min-height: 68px;
+
+      background: rgba(11, 18, 32, .94) !important;
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(255,255,255,.07);
+
+      position: sticky;
+      top: 0;
+
+      z-index: 1000;
+    }
+
+    .site-navbar .container {
+      width: 100%;
+    }
+
+    .site-navbar .navbar-brand {
+      background: transparent !important;
+    }
+
+    .brand-link {
+      gap: 10px;
+
+      min-height: 68px;
+
+      font-weight: 800;
+      letter-spacing: -.02em;
+
+      color: #fff !important;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 10px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          #60a5fa
+        );
+
+      box-shadow:
+        0 8px 25px rgba(41, 98, 255, .30);
+    }
+
+    .brand-name {
+      font-size: 1rem;
+    }
+
+    .brand-subtitle {
+      display: block;
+
+      margin-top: 2px;
+
+      color: #94a3b8;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: .58rem;
+
+      letter-spacing: .08em;
+    }
+
+    .site-navbar .navbar-menu {
+      background: transparent !important;
+    }
+
+    .site-navbar .navbar-end {
+      align-items: center;
+      gap: 3px;
+    }
+
+    .site-navbar .navbar-item {
+      color: #cbd5e1 !important;
+
+      font-size: .88rem;
+      font-weight: 600;
+
+      border-radius: 9px;
+
+      margin: 0 2px;
+
+      padding: .65rem .8rem;
+    }
+
+    .site-navbar .navbar-item:hover {
+      color: #fff !important;
+
+      background:
+        rgba(255,255,255,.08) !important;
+    }
+
+    .site-navbar .navbar-item.is-active {
+      color: #fff !important;
+
+      background:
+        rgba(41, 98, 255, .22) !important;
+
+      box-shadow:
+        inset 0 0 0 1px rgba(96,165,250,.15);
+    }
+
+    .github-link {
+      margin-left: 7px !important;
+
+      border:
+        1px solid rgba(255,255,255,.13);
+    }
+
+    .navbar-burger {
+      color: #fff !important;
+
+      border-radius: 10px;
+
+      margin:
+        auto 8px
+        auto auto;
+
+      height: 44px;
+      width: 44px;
+    }
+
+    .navbar-burger:hover {
+      background:
+        rgba(255,255,255,.08);
+    }
+
+    .navbar-burger span {
+      height: 2px;
+      width: 18px;
+
+      left:
+        calc(50% - 9px);
+    }
+
+    /* =========================================================
+       MOBILE NAV OVERLAY
+    ========================================================= */
+
+    .mobile-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(2, 6, 23, .62);
+
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity .25s ease,
+        visibility .25s ease;
+
+      z-index: 998;
+    }
+
+    body.menu-open .mobile-overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .docs-hero {
+      position: relative;
+
+      min-height: 470px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      color: #fff;
+
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(41,98,255,.27),
+          transparent 27%
+        ),
+        radial-gradient(
+          circle at 20% 80%,
+          rgba(96,165,250,.10),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #0b1220 0%,
+          #111827 55%,
+          #172554 100%
+        );
+    }
+
+    .docs-hero::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      opacity: .075;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.45) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.45) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom right,
+          black,
+          transparent 75%
+        );
+
+      -webkit-mask-image:
+        linear-gradient(
+          to bottom right,
+          black,
+          transparent 75%
+        );
+    }
+
+    .hero-orbit {
+      position: absolute;
+
+      width: 350px;
+      height: 350px;
+
+      right: -120px;
+      top: 40px;
+
+      border:
+        1px solid
+        rgba(96,165,250,.18);
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 35px
+        rgba(96,165,250,.035),
+
+        0 0 0 70px
+        rgba(96,165,250,.025);
+    }
+
+    .hero-orbit::after {
+      content: "</>";
+
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      transform:
+        translate(-50%, -50%)
+        rotate(-12deg);
+
+      color:
+        rgba(96,165,250,.12);
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size: 4rem;
+      font-weight: 600;
+    }
+
+    .hero-content {
+      position: relative;
+
+      z-index: 2;
+
+      max-width: 850px;
+
+      padding: 68px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding:
+        7px 12px;
+
+      border:
+        1px solid
+        rgba(96,165,250,.24);
+
+      border-radius: 999px;
+
+      background:
+        rgba(96,165,250,.08);
+
+      color:
+        #bfdbfe;
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size: .7rem;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      color: #fff !important;
+
+      font-size:
+        clamp(
+          2.4rem,
+          5vw,
+          4.25rem
+        ) !important;
+
+      line-height: 1.04 !important;
+
+      letter-spacing: -.045em;
+
+      margin-bottom: 18px !important;
+    }
+
+    .hero-title span {
+      color: #60a5fa;
+    }
+
+    .hero-description {
+      max-width: 700px;
+
+      color:
+        #cbd5e1 !important;
+
+      font-size:
+        1.06rem !important;
+
+      line-height: 1.8;
+
+      margin-bottom: 28px !important;
+    }
+
+    .hero-actions {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+    }
+
+    .hero-actions .button {
+      min-height: 46px;
+
+      border-radius: 11px;
+
+      font-weight: 700;
+    }
+
+    .button-primary {
+      background:
+        var(--primary) !important;
+
+      border-color:
+        var(--primary) !important;
+
+      color: #fff !important;
+
+      box-shadow:
+        0 12px 28px
+        rgba(41,98,255,.25);
+    }
+
+    .button-primary:hover {
+      background:
+        var(--primary-dark) !important;
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 16px 34px
+        rgba(41,98,255,.32);
+    }
+
+    .button-ghost {
+      background:
+        rgba(255,255,255,.06) !important;
+
+      border:
+        1px solid
+        rgba(255,255,255,.15) !important;
+
+      color: #fff !important;
+    }
+
+    .button-ghost:hover {
+      background:
+        rgba(255,255,255,.11) !important;
+
+      transform:
+        translateY(-2px);
+    }
+
+    /* =========================================================
+       DOCUMENTATION LAYOUT
+    ========================================================= */
+
+    .documentation-section {
+      padding:
+        72px 1.5rem 80px;
+    }
+
+    .docs-layout {
+      max-width: 1150px;
+
+      margin: 0 auto;
+
+      display: grid;
+
+      grid-template-columns:
+        220px minmax(0, 1fr);
+
+      gap: 30px;
+
+      align-items: start;
+    }
+
+    /* =========================================================
+       DOCUMENTATION SIDE NAV
+    ========================================================= */
+
+    .docs-sidebar {
+      position: sticky;
+
+      top: 92px;
+    }
+
+    .sidebar-card {
+      background:
+        rgba(255,255,255,.92);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        16px;
+
+      padding:
+        18px;
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+    .sidebar-title {
+      color:
+        var(--dark);
+
+      font-size:
+        .75rem;
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .08em;
+
+      margin:
+        0 0 12px 5px;
+    }
+
+    .docs-nav-link {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap: 10px;
+
+      width: 100%;
+
+      padding:
+        10px 11px;
+
+      margin:
+        3px 0;
+
+      border-radius:
+        9px;
+
+      color:
+        #64748b;
+
+      text-decoration:
+        none;
+
+      font-size:
+        .83rem;
+
+      font-weight:
+        600;
+    }
+
+    .docs-nav-link:hover {
+      color:
+        var(--primary);
+
+      background:
+        #eff6ff;
+
+      transform:
+        translateX(2px);
+    }
+
+    .docs-nav-link .icon {
+      width:
+        18px;
+
+      color:
+        var(--primary);
+    }
+
+    .sidebar-note {
+      margin-top:
+        17px;
+
+      padding:
+        13px;
+
+      border-radius:
+        11px;
+
+      background:
+        #f8fafc;
+
+      border:
+        1px solid
+        var(--border);
+
+      color:
+        #64748b;
+
+      font-size:
+        .74rem;
+
+      line-height:
+        1.6;
+    }
+
+    /* =========================================================
+       DOCUMENT CARDS
+    ========================================================= */
+
+    .docs-content {
+      min-width: 0;
+    }
+
+    .doc-card {
+      background:
+        rgba(255,255,255,.96);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        var(--radius);
+
+      padding:
+        34px;
+
+      margin-bottom:
+        22px;
+
+      box-shadow:
+        var(--shadow-sm);
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
+
+    .doc-card:hover {
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        var(--shadow-md);
+
+      border-color:
+        #d5deeb;
+    }
+
+    .doc-heading {
+      display:
+        flex;
+
+      align-items:
+        flex-start;
+
+      gap: 14px;
+
+      margin-bottom:
+        23px;
+    }
+
+    .doc-number {
+      flex:
+        0 0 42px;
+
+      width:
+        42px;
+
+      height:
+        42px;
+
+      border-radius:
+        12px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      color:
+        #fff;
+
+      background:
+        var(--primary);
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size:
+        .75rem;
+
+      font-weight:
+        600;
+
+      box-shadow:
+        0 8px 20px
+        rgba(41,98,255,.20);
+    }
+
+    .doc-card.installation
+    .doc-number {
+      background:
+        var(--green);
+    }
+
+    .doc-card.simulation
+    .doc-number {
+      background:
+        var(--orange);
+    }
+
+    .doc-card.citation
+    .doc-number {
+      background:
+        var(--purple);
+    }
+
+    .doc-heading h2 {
+      color:
+        var(--dark);
+
+      font-size:
+        1.4rem;
+
+      letter-spacing:
+        -.025em;
+
+      margin:
+        0 0 5px;
+    }
+
+    .doc-heading p {
+      color:
+        var(--muted);
+
+      font-size:
+        .88rem;
+
+      margin:
+        0;
+    }
+
+    .doc-text {
+      color:
+        #475569;
+
+      font-size:
+        .96rem;
+
+      line-height:
+        1.75;
+
+      margin-bottom:
+        15px;
+    }
+
+    /* =========================================================
+       CODE BLOCKS
+    ========================================================= */
+
+    .code-wrapper {
+      position:
+        relative;
+
+      margin:
+        15px 0 22px;
+    }
+
+    .code-label {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      padding:
+        8px 13px;
+
+      background:
+        #111827;
+
+      border:
+        1px solid
+        rgba(255,255,255,.06);
+
+      border-bottom:
+        0;
+
+      border-radius:
+        11px 11px 0 0;
+
+      color:
+        #94a3b8;
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size:
+        .68rem;
+
+      letter-spacing:
+        .04em;
+    }
+
+    .code-dots {
+      display:
+        flex;
+
+      gap:
+        5px;
+    }
+
+    .code-dot {
+      width:
+        7px;
+
+      height:
+        7px;
+
+      border-radius:
+        50%;
+
+      background:
+        #475569;
+    }
+
+    pre {
+      margin:
+        0 !important;
+
+      padding:
+        20px !important;
+
+      overflow-x:
+        auto;
+
+      background:
+        #0f172a !important;
+
+      color:
+        #e2e8f0 !important;
+
+      border:
+        1px solid
+        #1e293b;
+
+      border-radius:
+        0 0 11px 11px;
+
+      font-family:
+        "JetBrains Mono",
+        Consolas,
+        monospace;
+
+      font-size:
+        .82rem;
+
+      line-height:
+        1.7;
+
+      box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.025);
+    }
+
+    code {
+      color:
+        #7dd3fc !important;
+
+      font-family:
+        "JetBrains Mono",
+        Consolas,
+        monospace;
+    }
+
+    .code-command {
+      color:
+        #e2e8f0;
+    }
+
+    /* =========================================================
+       INLINE INFO
+    ========================================================= */
+
+    .tip-box {
+      display:
+        flex;
+
+      align-items:
+        flex-start;
+
+      gap:
+        12px;
+
+      padding:
+        15px 16px;
+
+      margin-top:
+        20px;
+
+      border-radius:
+        12px;
+
+      background:
+        #eff6ff;
+
+      border:
+        1px solid
+        #dbeafe;
+
+      color:
+        #475569;
+
+      font-size:
+        .84rem;
+
+      line-height:
+        1.65;
+    }
+
+    .tip-box .icon {
+      color:
+        var(--primary);
+
+      margin-top:
+        2px;
+    }
+
+    /* =========================================================
+       CITATION
+    ========================================================= */
+
+    .citation-note {
+      padding:
+        13px 15px;
+
+      border-left:
+        3px solid
+        var(--purple);
+
+      background:
+        #faf5ff;
+
+      color:
+        #64748b;
+
+      font-size:
+        .84rem;
+
+      line-height:
+        1.65;
+
+      border-radius:
+        0 9px 9px 0;
+
+      margin-bottom:
+        18px;
+    }
+
+    /* =========================================================
+       BOTTOM CTA
+    ========================================================= */
+
+    .docs-cta {
+      max-width:
+        900px;
+
+      margin:
+        35px auto 0;
+
+      padding:
+        35px;
+
+      border-radius:
+        var(--radius);
+
+      text-align:
+        center;
+
+      color:
+        #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0f172a,
+          #172554
+        );
+
+      box-shadow:
+        var(--shadow-md);
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+    }
+
+    .docs-cta::before {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        220px;
+
+      height:
+        220px;
+
+      border-radius:
+        50%;
+
+      right:
+        -100px;
+
+      top:
+        -100px;
+
+      border:
+        1px solid
+        rgba(96,165,250,.15);
+    }
+
+    .docs-cta h2 {
+      position:
+        relative;
+
+      color:
+        #fff;
+
+      font-size:
+        1.6rem;
+
+      margin-bottom:
+        9px;
+    }
+
+    .docs-cta p {
+      position:
+        relative;
+
+      color:
+        #cbd5e1;
+
+      font-size:
+        .9rem;
+
+      line-height:
+        1.7;
+
+      max-width:
+        600px;
+
+      margin:
+        0 auto 21px;
+    }
+
+    .docs-cta .button {
+      position:
+        relative;
+
+      border-radius:
+        10px;
+
+      font-weight:
+        700;
+
+      padding-left:
+        25px;
+
+      padding-right:
+        25px;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .site-footer {
+      margin-top:
+        auto;
+
+      background:
+        #0b1220;
+
+      color:
+        #94a3b8;
+
+      padding:
+        38px 1.5rem 28px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.06);
+    }
+
+    .footer-inner {
+      max-width:
+        1150px;
+
+      margin:
+        0 auto;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+    }
+
+    .footer-brand {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      color:
+        #fff;
+
+      font-weight:
+        800;
+    }
+
+    .footer-brand .brand-icon {
+      width:
+        30px;
+
+      height:
+        30px;
+
+      border-radius:
+        8px;
+
+      font-size:
+        .8rem;
+    }
+
+    .footer-text {
+      margin-top:
+        8px;
+
+      font-size:
+        .78rem;
+
+      color:
+        #64748b;
+    }
+
+    .footer-links {
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        6px;
+    }
+
+    .footer-links a {
+      color:
+        #94a3b8;
+
+      text-decoration:
+        none;
+
+      font-size:
+        .82rem;
+
+      padding:
+        6px 8px;
+
+      border-radius:
+        7px;
+    }
+
+    .footer-links a:hover {
+      color:
+        #fff;
+
+      background:
+        rgba(255,255,255,.06);
+    }
+
+    /* =========================================================
+       BACK TO TOP
+    ========================================================= */
+
+    .back-to-top {
+      position:
+        fixed;
+
+      right:
+        22px;
+
+      bottom:
+        22px;
+
+      width:
+        43px;
+
+      height:
+        43px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        12px;
+
+      background:
+        #fff;
+
+      color:
+        var(--dark);
+
+      box-shadow:
+        0 10px 25px
+        rgba(15,23,42,.12);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      cursor:
+        pointer;
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      transform:
+        translateY(10px);
+
+      transition:
+        all .25s ease;
+
+      z-index:
+        900;
+    }
+
+    .back-to-top.is-visible {
+      opacity:
+        1;
+
+      visibility:
+        visible;
+
+      transform:
+        translateY(0);
+    }
+
+    .back-to-top:hover {
+      color:
+        var(--primary);
+
+      transform:
+        translateY(-2px);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1023px) {
+
+      .site-navbar .navbar-menu {
+        position:
+          fixed;
+
+        top:
+          0;
+
+        right:
+          0;
+
+        width:
+          min(86vw, 360px);
+
+        height:
+          100vh;
+
+        min-height:
+          100vh;
+
+        padding:
+          82px 18px 24px;
+
+        background:
+          #0b1220 !important;
+
+        box-shadow:
+          -20px 0 50px
+          rgba(0,0,0,.25);
+
+        transform:
+          translateX(105%);
+
+        visibility:
+          hidden;
+
+        opacity:
+          0;
+
+        transition:
+          transform .28s ease,
+          opacity .2s ease,
+          visibility .28s ease;
+
+        overflow-y:
+          auto;
+
+        z-index:
+          999;
+
+        display:
+          block;
+      }
+
+      .site-navbar
+      .navbar-menu.is-active {
+        transform:
+          translateX(0);
+
+        visibility:
+          visible;
+
+        opacity:
+          1;
+      }
+
+      .site-navbar .navbar-end {
+        display:
+          flex;
+
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
+
+        gap:
+          5px;
+      }
+
+      .site-navbar .navbar-item {
+        width:
+          100%;
+
+        margin:
+          0;
+
+        min-height:
+          48px;
+
+        padding:
+          12px 14px;
+
+        display:
+          flex;
+
+        align-items:
+          center;
+
+        border-radius:
+          10px;
+      }
+
+      .github-link {
+        margin:
+          10px 0 0 !important;
+
+        justify-content:
+          center;
+      }
+
+      .docs-layout {
+        grid-template-columns:
+          1fr;
+      }
+
+      .docs-sidebar {
+        position:
+          static;
+      }
+
+      .sidebar-card {
+        display:
+          flex;
+
+        align-items:
+          center;
+
+        gap:
+          12px;
+
+        flex-wrap:
+          wrap;
+      }
+
+      .sidebar-title {
+        width:
+          100%;
+
+        margin-bottom:
+          2px;
+      }
+
+      .docs-nav-link {
+        width:
+          auto;
+
+        flex:
+          1 1 auto;
+      }
+
+      .sidebar-note {
+        width:
+          100%;
       }
     }
-    /* Navbar customization */
-    .navbar-brand, .navbar-menu { background-color: var(--dark); }
-    .navbar-item, .navbar-link { color: #fff !important; }
-    .navbar-link:hover, .navbar-item:hover, .navbar-link.is-active { background-color: rgba(255,255,255,0.1); color: #fff !important; }
-    .navbar-dropdown a.navbar-item:hover { background-color: rgba(255,255,255,0.1); color: #fff; }
-    .navbar-burger { color: #fff; }
+
+    @media (max-width: 700px) {
+
+      .docs-hero {
+        min-height:
+          410px;
+      }
+
+      .hero-content {
+        padding:
+          52px 0;
+      }
+
+      .hero-description {
+        font-size:
+          .97rem !important;
+      }
+
+      .documentation-section {
+        padding:
+          50px 1rem 60px;
+      }
+
+      .doc-card {
+        padding:
+          23px 17px;
+      }
+
+      .doc-heading h2 {
+        font-size:
+          1.22rem;
+      }
+
+      .sidebar-card {
+        display:
+          block;
+      }
+
+      .docs-nav-link {
+        width:
+          100%;
+      }
+
+      .docs-cta {
+        padding:
+          28px 20px;
+      }
+
+      .footer-inner {
+        flex-direction:
+          column;
+
+        align-items:
+          flex-start;
+      }
+
+      .footer-links {
+        width:
+          100%;
+      }
+
+      .back-to-top {
+        right:
+          14px;
+
+        bottom:
+          14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .brand-subtitle {
+        display:
+          none;
+      }
+
+      .brand-name {
+        font-size:
+          .92rem;
+      }
+
+      .hero-title {
+        font-size:
+          2.35rem !important;
+      }
+
+      .hero-actions {
+        flex-direction:
+          column;
+
+        width:
+          100%;
+      }
+
+      .hero-actions .button {
+        width:
+          100%;
+      }
+
+      pre {
+        font-size:
+          .72rem;
+
+        padding:
+          15px !important;
+      }
+
+      .code-label {
+        font-size:
+          .62rem;
+      }
+    }
+
+    /* =========================================================
+       ACCESSIBILITY
+    ========================================================= */
+
+    :focus-visible {
+      outline:
+        3px solid
+        rgba(96,165,250,.65);
+
+      outline-offset:
+        3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior:
+          auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          .01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          .01ms !important;
+
+        scroll-behavior:
+          auto !important;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav
+  class="navbar site-navbar"
+  role="navigation"
+  aria-label="Main navigation"
+>
+
   <div class="container">
+
     <div class="navbar-brand">
-      <a class="navbar-item" href="index.html">
-        <span class="icon"><i class="fas fa-microchip"></i></span>
-        <span>DDLSim-Lab</span>
+
+      <a
+        class="navbar-item brand-link"
+        href="index.html"
+      >
+
+        <span class="brand-icon">
+          <i
+            class="fas fa-microchip"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span>
+
+          <span class="brand-name">
+            DDLSim-Lab
+          </span>
+
+          <span class="brand-subtitle">
+            OPEN RESEARCH PROJECT
+          </span>
+
+        </span>
+
       </a>
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+
+
+      <a
+        role="button"
+        class="navbar-burger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        data-target="mainNavigation"
+      >
+
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
+
       </a>
+
     </div>
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start"></div>
+
+
+    <div
+      id="mainNavigation"
+      class="navbar-menu"
+    >
+
       <div class="navbar-end">
-        <a class="navbar-item" href="index.html">Home</a>
-        <a class="navbar-item" href="about.html">About & Call</a>
-        <a class="navbar-item" href="research.html">Research</a>
-        <a class="navbar-item" href="documentation.html">Docs</a>
-        <a class="navbar-item" href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank">
-          <span class="icon"><i class="fab fa-github"></i></span>
-          <span>GitHub</span>
+
+        <a
+          class="navbar-item"
+          href="index.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-home"></i>
+          </span>
+          <span>Home</span>
         </a>
+
+
+        <a
+          class="navbar-item"
+          href="about.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-info-circle"></i>
+          </span>
+          <span>About &amp; Call</span>
+        </a>
+
+
+        <a
+          class="navbar-item"
+          href="research.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-flask"></i>
+          </span>
+          <span>Research</span>
+        </a>
+
+
+        <a
+          class="navbar-item is-active"
+          href="documentation.html"
+          aria-current="page"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-book"></i>
+          </span>
+          <span>Docs</span>
+        </a>
+
+
+        <a
+          class="navbar-item"
+          href="blog.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-newspaper"></i>
+          </span>
+          <span>Blog</span>
+        </a>
+
+
+        <a
+          class="navbar-item"
+          href="contact.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span>Contact</span>
+        </a>
+
+
+        <a
+          class="navbar-item github-link"
+          href="https://github.com/ktruby-oss/DDLSim-Lab"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <span class="icon is-small">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span>GitHub</span>
+
+        </a>
+
       </div>
+
     </div>
+
   </div>
+
 </nav>
 
-<section class="hero is-fullheight-with-navbar">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <div class="hero-banner fade-in">
-        <h1 class="title is-1">DDLSim-Lab</h1>
-        <h2 class="subtitle is-3">Documentation & Quick Start</h2>
-        <div style="margin-top: 20px;">
-          <span class="tag is-info is-medium"><i class="fas fa-check-circle" style="margin-right:5px;"></i> Active Research Since 2025</span>
-          <span class="tag is-success is-medium"><i class="fab fa-osi" style="margin-right:5px;"></i> Fully Open Source</span>
-        </div>
-        <div style="margin-top: 30px;">
-          <a href="https://github.com/ktruby-oss/DDLSim-Lab" class="button is-primary is-medium is-rounded" style="margin-right: 15px;">
-            <span class="icon"><i class="fab fa-github"></i></span><span>View on GitHub</span>
-          </a>
-          <a href="research.html" class="button is-light is-medium is-rounded is-outlined">
-            <span class="icon"><i class="fas fa-network-wired"></i></span><span>Explore Capabilities</span>
-          </a>
-        </div>
+<div
+  class="mobile-overlay"
+  id="mobileOverlay"
+  aria-hidden="true"
+></div>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="docs-hero">
+
+  <div
+    class="hero-orbit"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+
+        <i class="fas fa-terminal"></i>
+
+        DDLSIM-LAB / DOCUMENTATION
+
       </div>
+
+
+      <h1 class="title hero-title">
+
+        Build.
+        <span>Simulate.</span>
+        Explore.
+
+      </h1>
+
+
+      <p class="subtitle hero-description">
+
+        Documentation and quick-start instructions for installing
+        DDLSim-Lab, running simulations, configuring experiments,
+        and citing the project in academic work.
+
+      </p>
+
+
+      <div class="hero-actions">
+
+        <a
+          href="https://github.com/ktruby-oss/DDLSim-Lab"
+          class="button button-primary is-medium"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span>View on GitHub</span>
+
+        </a>
+
+
+        <a
+          href="#installation"
+          class="button button-ghost is-medium"
+        >
+
+          <span class="icon">
+            <i class="fas fa-rocket"></i>
+          </span>
+
+          <span>Quick Start</span>
+
+        </a>
+
+      </div>
+
     </div>
+
   </div>
+
 </section>
 
-<section class="section">
+
+<!-- =========================================================
+     DOCUMENTATION
+========================================================= -->
+
+<section
+  class="documentation-section"
+  id="documentation"
+>
+
   <div class="container">
-    <div class="info-card fade-in" style="animation-delay: 0.1s;">
-      <h2 class="title is-3"><i class="fas fa-download" style="color: #10b981; margin-right: 10px;"></i>1. Installation</h2>
-      <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Clone the repository and install the required dependencies:</p>
-      <pre><code>git clone https://github.com/ktruby-oss/DDLSim-Lab.git
+
+    <div class="docs-layout">
+
+
+      <!-- =====================================================
+           SIDEBAR
+      ====================================================== -->
+
+      <aside class="docs-sidebar">
+
+        <div class="sidebar-card">
+
+          <div class="sidebar-title">
+            On this page
+          </div>
+
+
+          <a
+            class="docs-nav-link"
+            href="#installation"
+          >
+
+            <span class="icon">
+              <i class="fas fa-download"></i>
+            </span>
+
+            <span>Installation</span>
+
+          </a>
+
+
+          <a
+            class="docs-nav-link"
+            href="#simulation"
+          >
+
+            <span class="icon">
+              <i class="fas fa-play"></i>
+            </span>
+
+            <span>Simulation</span>
+
+          </a>
+
+
+          <a
+            class="docs-nav-link"
+            href="#citation"
+          >
+
+            <span class="icon">
+              <i class="fas fa-quote-right"></i>
+            </span>
+
+            <span>Citation</span>
+
+          </a>
+
+
+          <a
+            class="docs-nav-link"
+            href="#full-docs"
+          >
+
+            <span class="icon">
+              <i class="fas fa-book-open"></i>
+            </span>
+
+            <span>Full Docs</span>
+
+          </a>
+
+
+          <div class="sidebar-note">
+
+            <i
+              class="fas fa-info-circle"
+              style="color: var(--primary); margin-right: 5px;"
+            ></i>
+
+            Start with installation, then run the basic simulation
+            before moving to custom configurations.
+
+          </div>
+
+        </div>
+
+      </aside>
+
+
+      <!-- =====================================================
+           MAIN DOCUMENTATION
+      ====================================================== -->
+
+      <main class="docs-content">
+
+
+        <!-- ===================================================
+             INSTALLATION
+        ==================================================== -->
+
+        <article
+          class="doc-card installation"
+          id="installation"
+        >
+
+          <div class="doc-heading">
+
+            <div class="doc-number">
+              01
+            </div>
+
+            <div>
+
+              <h2>
+                Installation
+              </h2>
+
+              <p>
+                Clone the repository and install the required dependencies.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <p class="doc-text">
+
+            Clone the repository and install the required dependencies:
+
+          </p>
+
+
+          <div class="code-wrapper">
+
+            <div class="code-label">
+
+              <span>
+                terminal
+              </span>
+
+              <span class="code-dots">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+              </span>
+
+            </div>
+
+
+            <pre><code>git clone https://github.com/ktruby-oss/DDLSim-Lab.git
 cd DDLSim-Lab
 pip install -r requirements.txt</code></pre>
-    </div>
 
-    <div class="info-card fade-in" style="animation-delay: 0.2s;">
-      <h2 class="title is-3"><i class="fas fa-play-circle" style="color: #f59e0b; margin-right: 10px;"></i>2. Running a Simulation</h2>
-      <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Execute the main script to start a basic 2-node simulation with random latency and packet loss:</p>
-      <pre><code>python main.py</code></pre>
-      <br>
-      <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">Or use an advanced custom YAML configuration:</p>
-      <pre><code>python main.py --config configs/edge_cloud_hybrid.yaml</code></pre>
-    </div>
+          </div>
 
-    <div class="info-card fade-in" style="animation-delay: 0.3s;">
-      <h2 class="title is-3"><i class="fas fa-quote-right" style="color: #8b5cf6; margin-right: 10px;"></i>3. Citation</h2>
-      <p style="font-size: 1.1rem; margin-bottom: 15px; color: #475569;">If you use DDLSim-Lab in your academic work, please use the following BibTeX citation:</p>
-      <pre><code>@software{truby2025ddlsimlab,
+
+          <div class="tip-box">
+
+            <span class="icon">
+              <i class="fas fa-lightbulb"></i>
+            </span>
+
+            <span>
+              Once the dependencies are installed, you can move on
+              to running the basic simulation.
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- ===================================================
+             SIMULATION
+        ==================================================== -->
+
+        <article
+          class="doc-card simulation"
+          id="simulation"
+        >
+
+          <div class="doc-heading">
+
+            <div class="doc-number">
+              02
+            </div>
+
+            <div>
+
+              <h2>
+                Running a Simulation
+              </h2>
+
+              <p>
+                Start with a basic simulation or provide a custom YAML configuration.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <p class="doc-text">
+
+            Execute the main script to start a basic 2-node simulation
+            with random latency and packet loss:
+
+          </p>
+
+
+          <div class="code-wrapper">
+
+            <div class="code-label">
+
+              <span>
+                terminal / basic
+              </span>
+
+              <span class="code-dots">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+              </span>
+
+            </div>
+
+
+            <pre><code>python main.py</code></pre>
+
+          </div>
+
+
+          <p class="doc-text">
+
+            Or use an advanced custom YAML configuration:
+
+          </p>
+
+
+          <div class="code-wrapper">
+
+            <div class="code-label">
+
+              <span>
+                terminal / configuration
+              </span>
+
+              <span class="code-dots">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+              </span>
+
+            </div>
+
+
+            <pre><code>python main.py --config configs/edge_cloud_hybrid.yaml</code></pre>
+
+          </div>
+
+
+          <div class="tip-box">
+
+            <span class="icon">
+              <i class="fas fa-network-wired"></i>
+            </span>
+
+            <span>
+              Custom YAML configurations can be used when you need
+              more control over the simulation environment.
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- ===================================================
+             CITATION
+        ==================================================== -->
+
+        <article
+          class="doc-card citation"
+          id="citation"
+        >
+
+          <div class="doc-heading">
+
+            <div class="doc-number">
+              03
+            </div>
+
+            <div>
+
+              <h2>
+                Citation
+              </h2>
+
+              <p>
+                BibTeX information for academic use of DDLSim-Lab.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <p class="doc-text">
+
+            If you use DDLSim-Lab in your academic work,
+            please use the following BibTeX citation:
+
+          </p>
+
+
+          <div class="citation-note">
+
+            <i
+              class="fas fa-quote-left"
+              style="color: var(--purple); margin-right: 5px;"
+            ></i>
+
+            Copy the following entry into your BibTeX bibliography.
+
+          </div>
+
+
+          <div class="code-wrapper">
+
+            <div class="code-label">
+
+              <span>
+                BibTeX
+              </span>
+
+              <span class="code-dots">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+              </span>
+
+            </div>
+
+
+            <pre><code>@software{truby2025ddlsimlab,
   author = {Truby, Kaitlyn Brishae},
   title = {DDLSim-Lab: Distributed simulation environment using bare metal nodes},
   year = {2025},
@@ -131,42 +2293,447 @@ pip install -r requirements.txt</code></pre>
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/ktruby-oss/DDLSim-Lab}}
 }</code></pre>
+
+          </div>
+
+        </article>
+
+
+        <!-- ===================================================
+             FULL DOCS CTA
+        ==================================================== -->
+
+        <div
+          class="docs-cta"
+          id="full-docs"
+        >
+
+          <h2>
+            Explore the full documentation
+          </h2>
+
+          <p>
+            Access the project's documentation directory on GitHub
+            for additional project material and resources.
+          </p>
+
+
+          <a
+            href="https://github.com/ktruby-oss/DDLSim-Lab/tree/main/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button is-light is-medium"
+          >
+
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span>
+              View Full Docs on GitHub
+            </span>
+
+          </a>
+
+        </div>
+
+
+      </main>
+
     </div>
 
-    <div class="has-text-centered fade-in" style="animation-delay: 0.4s; margin-top: 3rem;">
-      <a href="https://github.com/ktruby-oss/DDLSim-Lab/tree/main/docs" target="_blank" class="button is-primary is-large is-rounded" style="padding: 0 40px; box-shadow: 0 10px 20px rgba(41, 98, 255, 0.3);">
-        <span class="icon"><i class="fab fa-github"></i></span>
-        <span>View Full Docs on GitHub</span>
-      </a>
-    </div>
   </div>
+
 </section>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>© 2026 DDLSim-Lab. All rights reserved.</p>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+  <div class="footer-inner">
+
+    <div>
+
+      <div class="footer-brand">
+
+        <span class="brand-icon">
+
+          <i class="fas fa-microchip"></i>
+
+        </span>
+
+        <span>
+          DDLSim-Lab
+        </span>
+
+      </div>
+
+
+      <div class="footer-text">
+
+        © 2026 DDLSim-Lab. All rights reserved.
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="research.html">
+        Research
+      </a>
+
+      <a href="documentation.html">
+        Docs
+      </a>
+
+      <a href="blog.html">
+        Blog
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a
+        href="https://github.com/ktruby-oss/DDLSim-Lab"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
+
+    </div>
+
   </div>
+
 </footer>
 
+
+<!-- =========================================================
+     BACK TO TOP
+========================================================= -->
+
+<button
+  class="back-to-top"
+  id="backToTop"
+  type="button"
+  aria-label="Back to top"
+>
+
+  <i class="fas fa-arrow-up"></i>
+
+</button>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Get all "navbar-burger" elements
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-    // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
-      // Add a click event on each of them
-      $navbarBurgers.forEach(el => {
-        el.addEventListener('click', () => {
-          // Get the target from the "data-target" attribute
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
-        });
-      });
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================================================
+     MOBILE NAVIGATION
+  ========================================================= */
+
+  const burger =
+    document.querySelector(".navbar-burger");
+
+  const menu =
+    document.getElementById("mainNavigation");
+
+  const overlay =
+    document.getElementById("mobileOverlay");
+
+
+  function openMenu() {
+
+    if (!burger || !menu) return;
+
+    burger.classList.add("is-active");
+
+    menu.classList.add("is-active");
+
+    burger.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    burger.setAttribute(
+      "aria-label",
+      "Close navigation menu"
+    );
+
+    document.body.classList.add(
+      "menu-open"
+    );
+  }
+
+
+  function closeMenu() {
+
+    if (!burger || !menu) return;
+
+    burger.classList.remove(
+      "is-active"
+    );
+
+    menu.classList.remove(
+      "is-active"
+    );
+
+    burger.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    burger.setAttribute(
+      "aria-label",
+      "Open navigation menu"
+    );
+
+    document.body.classList.remove(
+      "menu-open"
+    );
+  }
+
+
+  function toggleMenu() {
+
+    if (
+      menu.classList.contains(
+        "is-active"
+      )
+    ) {
+
+      closeMenu();
+
+    } else {
+
+      openMenu();
+
     }
-  });
+  }
+
+
+  if (burger) {
+
+    burger.addEventListener(
+      "click",
+      toggleMenu
+    );
+
+  }
+
+
+  if (overlay) {
+
+    overlay.addEventListener(
+      "click",
+      closeMenu
+    );
+
+  }
+
+
+  /* Close after navigation */
+
+  document
+    .querySelectorAll(
+      "#mainNavigation a"
+    )
+    .forEach(link => {
+
+      link.addEventListener(
+        "click",
+        closeMenu
+      );
+
+    });
+
+
+  /* Escape key */
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeMenu();
+
+      }
+
+    }
+  );
+
+
+  /* Close when returning to desktop */
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      if (
+        window.innerWidth > 1023
+      ) {
+
+        closeMenu();
+
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     SMOOTH INTERNAL DOCUMENTATION NAVIGATION
+  ========================================================= */
+
+  document
+    .querySelectorAll(
+      'a[href^="#"]'
+    )
+    .forEach(link => {
+
+      link.addEventListener(
+        "click",
+        event => {
+
+          const targetId =
+            link.getAttribute("href");
+
+          if (
+            !targetId ||
+            targetId === "#"
+          ) {
+            return;
+          }
+
+          const target =
+            document.querySelector(
+              targetId
+            );
+
+          if (!target) {
+            return;
+          }
+
+          event.preventDefault();
+
+          const offset = 88;
+
+          const position =
+            target.getBoundingClientRect().top +
+            window.scrollY -
+            offset;
+
+          window.scrollTo({
+            top: position,
+            behavior: "smooth"
+          });
+
+        }
+      );
+
+    });
+
+
+  /* =========================================================
+     BACK TO TOP
+  ========================================================= */
+
+  const backToTop =
+    document.getElementById(
+      "backToTop"
+    );
+
+
+  function updateBackToTop() {
+
+    if (!backToTop) return;
+
+    if (
+      window.scrollY > 500
+    ) {
+
+      backToTop.classList.add(
+        "is-visible"
+      );
+
+    } else {
+
+      backToTop.classList.remove(
+        "is-visible"
+      );
+
+    }
+
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    updateBackToTop,
+    {
+      passive: true
+    }
+  );
+
+
+  updateBackToTop();
+
+
+  if (backToTop) {
+
+    backToTop.addEventListener(
+      "click",
+      () => {
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     CURRENT YEAR
+  ========================================================= */
+
+  const footerText =
+    document.querySelector(
+      ".footer-text"
+    );
+
+
+  if (footerText) {
+
+    footerText.textContent =
+      `© ${new Date().getFullYear()} DDLSim-Lab. All rights reserved.`;
+
+  }
+
+});
 </script>
 
 </body>
