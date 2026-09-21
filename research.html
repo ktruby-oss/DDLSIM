@@ -3,179 +3,3165 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>DDLSim-Lab | Research & Experiments</title>
+
+  <meta
+    name="description"
+    content="DDLSim-Lab research capabilities, distributed deep learning experiments, fault injection, edge AI simulation, scheduling, and open research collaboration."
+  >
+
+  <meta name="theme-color" content="#0b1220">
+
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+    rel="stylesheet"
+  >
+
   <script defer src="static/js/fontawesome.all.min.js"></script>
+
   <style>
-    :root { --primary: #2962ff; --bg-light: #f4f6f8; --dark: #0f172a; }
-    body { background-color: var(--bg-light); font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-    .hero { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; }
-    .hero .title, .hero .subtitle { color: #fff; position: relative; }
-    .hero-banner { border-radius: 0; padding: 4rem 2rem; margin-bottom: 0; }
-    .hero-banner::after { content: ''; position: absolute; right: 0; top: 0; height: 100%; width: 50%; background: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800') center/cover; opacity: 0.15; mask-image: linear-gradient(to right, transparent, black); -webkit-mask-image: linear-gradient(to right, transparent, black); }
-    .hero-banner .title, .hero-banner .subtitle { position: relative; z-index: 2; }
-    .info-card { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05); height: 100%; transition: transform 0.3s ease; }
-    .info-card:hover { transform: translateY(-5px); }
-    .feature-img { border-radius: 12px; width: 100%; max-height: 300px; object-fit: cover; }
-    footer { margin-top: auto; padding: 2rem; text-align: center; color: #64748b; font-size: 0.9rem; border-top: 1px solid #e2e8f0; }
-    @media (max-width: 768px) {
-      .hero-banner { padding: 3rem 1rem; }
-      .info-card { padding: 1.5rem; }
+    :root {
+      --primary: #2962ff;
+      --primary-dark: #1746c7;
+      --accent: #60a5fa;
+
+      --dark: #0b1220;
+      --dark-2: #111827;
+
+      --text: #172033;
+      --muted: #64748b;
+
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+
+      --border: #e2e8f0;
+
+      --green: #10b981;
+      --orange: #f59e0b;
+      --purple: #8b5cf6;
+      --red: #ef4444;
+      --cyan: #06b6d4;
+
+      --radius: 18px;
+
+      --shadow-sm:
+        0 8px 25px rgba(15, 23, 42, .06);
+
+      --shadow-md:
+        0 18px 50px rgba(15, 23, 42, .10);
     }
-    /* Additional responsiveness and touch improvements */
-    @media (hover: hover) {
-      .info-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+    * {
+      box-sizing: border-box;
     }
-    .info-card:active { transform: translateY(-2px); }
-    /* Smooth scroll */
-    html { scroll-behavior: smooth; }
-    /* Reduce motion for users who prefer it */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 10% 0%,
+          rgba(41, 98, 255, .07),
+          transparent 28%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family: "Inter", sans-serif;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      transition:
+        color .2s ease,
+        background-color .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    .site-navbar {
+      min-height: 68px;
+
+      background: rgba(11, 18, 32, .94) !important;
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.07);
+
+      position: sticky;
+      top: 0;
+
+      z-index: 1000;
+    }
+
+    .site-navbar .container {
+      width: 100%;
+    }
+
+    .site-navbar .navbar-brand {
+      background: transparent !important;
+    }
+
+    .brand-link {
+      gap: 10px;
+
+      min-height: 68px;
+
+      font-weight: 800;
+      letter-spacing: -.02em;
+
+      color: #fff !important;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 10px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          #60a5fa
+        );
+
+      box-shadow:
+        0 8px 25px rgba(41,98,255,.30);
+    }
+
+    .brand-name {
+      font-size: 1rem;
+    }
+
+    .brand-subtitle {
+      display: block;
+
+      margin-top: 2px;
+
+      color: #94a3b8;
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size: .58rem;
+
+      letter-spacing: .08em;
+    }
+
+    .site-navbar .navbar-menu {
+      background: transparent !important;
+    }
+
+    .site-navbar .navbar-end {
+      align-items: center;
+      gap: 3px;
+    }
+
+    .site-navbar .navbar-item {
+      color: #cbd5e1 !important;
+
+      font-size: .88rem;
+      font-weight: 600;
+
+      border-radius: 9px;
+
+      margin: 0 2px;
+
+      padding: .65rem .8rem;
+    }
+
+    .site-navbar .navbar-item:hover {
+      color: #fff !important;
+
+      background:
+        rgba(255,255,255,.08) !important;
+    }
+
+    .site-navbar .navbar-item.is-active {
+      color: #fff !important;
+
+      background:
+        rgba(41,98,255,.22) !important;
+
+      box-shadow:
+        inset 0 0 0 1px
+        rgba(96,165,250,.15);
+    }
+
+    .github-link {
+      margin-left: 7px !important;
+
+      border:
+        1px solid rgba(255,255,255,.13);
+    }
+
+    .navbar-burger {
+      color: #fff !important;
+
+      border-radius: 10px;
+
+      margin:
+        auto 8px
+        auto auto;
+
+      height: 44px;
+      width: 44px;
+    }
+
+    .navbar-burger:hover {
+      background:
+        rgba(255,255,255,.08);
+    }
+
+    .navbar-burger span {
+      height: 2px;
+      width: 18px;
+
+      left:
+        calc(50% - 9px);
+    }
+
+    /* =========================================================
+       MOBILE OVERLAY
+    ========================================================= */
+
+    .mobile-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(2,6,23,.62);
+
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity .25s ease,
+        visibility .25s ease;
+
+      z-index: 998;
+    }
+
+    body.menu-open .mobile-overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .research-hero {
+      position: relative;
+
+      min-height: 500px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      color: #fff;
+
+      background:
+        radial-gradient(
+          circle at 82% 20%,
+          rgba(41,98,255,.30),
+          transparent 27%
+        ),
+        radial-gradient(
+          circle at 20% 85%,
+          rgba(6,182,212,.09),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          #0b1220 0%,
+          #111827 55%,
+          #172554 100%
+        );
+    }
+
+    .research-hero::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      opacity: .075;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.45) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.45) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom right,
+          black,
+          transparent 75%
+        );
+
+      -webkit-mask-image:
+        linear-gradient(
+          to bottom right,
+          black,
+          transparent 75%
+        );
+    }
+
+    .hero-orbit {
+      position: absolute;
+
+      width: 390px;
+      height: 390px;
+
+      right: -120px;
+      top: 25px;
+
+      border:
+        1px solid
+        rgba(96,165,250,.20);
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 35px
+        rgba(96,165,250,.035),
+
+        0 0 0 70px
+        rgba(96,165,250,.025);
+    }
+
+    .hero-orbit::before {
+      content: "";
+
+      position: absolute;
+
+      width: 12px;
+      height: 12px;
+
+      border-radius: 50%;
+
+      background:
+        #60a5fa;
+
+      top: 45px;
+      left: 80px;
+
+      box-shadow:
+        0 0 25px
+        rgba(96,165,250,.8);
+    }
+
+    .hero-orbit::after {
+      content: "AI";
+
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      transform:
+        translate(-50%,-50%)
+        rotate(-8deg);
+
+      color:
+        rgba(96,165,250,.09);
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size: 5rem;
+
+      font-weight: 600;
+    }
+
+    .hero-content {
+      position: relative;
+
+      z-index: 2;
+
+      max-width: 880px;
+
+      padding: 75px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding:
+        7px 12px;
+
+      border:
+        1px solid
+        rgba(96,165,250,.24);
+
+      border-radius: 999px;
+
+      background:
+        rgba(96,165,250,.08);
+
+      color:
+        #bfdbfe;
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size: .7rem;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      color: #fff !important;
+
+      font-size:
+        clamp(
+          2.35rem,
+          5vw,
+          4.4rem
+        ) !important;
+
+      line-height:
+        1.03 !important;
+
+      letter-spacing:
+        -.05em;
+
+      margin-bottom:
+        20px !important;
+    }
+
+    .hero-title span {
+      color:
+        #60a5fa;
+    }
+
+    .hero-description {
+      max-width:
+        760px;
+
+      color:
+        #cbd5e1 !important;
+
+      font-size:
+        1.08rem !important;
+
+      line-height:
+        1.8;
+
+      margin-bottom:
+        27px !important;
+    }
+
+    .hero-meta {
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        9px;
+
+      margin-bottom:
+        27px;
+    }
+
+    .research-badge {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      padding:
+        8px 12px;
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(255,255,255,.07);
+
+      border:
+        1px solid
+        rgba(255,255,255,.10);
+
+      color:
+        #dbeafe;
+
+      font-size:
+        .76rem;
+
+      font-weight:
+        600;
+    }
+
+    .research-badge i {
+      color:
+        #60a5fa;
+    }
+
+    .hero-actions {
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        12px;
+    }
+
+    .hero-actions .button {
+      min-height:
+        47px;
+
+      border-radius:
+        11px;
+
+      font-weight:
+        700;
+    }
+
+    .button-primary {
+      background:
+        var(--primary) !important;
+
+      border-color:
+        var(--primary) !important;
+
+      color:
+        #fff !important;
+
+      box-shadow:
+        0 12px 28px
+        rgba(41,98,255,.25);
+    }
+
+    .button-primary:hover {
+      background:
+        var(--primary-dark) !important;
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 16px 34px
+        rgba(41,98,255,.32);
+    }
+
+    .button-ghost {
+      background:
+        rgba(255,255,255,.06) !important;
+
+      border:
+        1px solid
+        rgba(255,255,255,.15) !important;
+
+      color:
+        #fff !important;
+    }
+
+    .button-ghost:hover {
+      background:
+        rgba(255,255,255,.11) !important;
+
+      transform:
+        translateY(-2px);
+    }
+
+    /* =========================================================
+       RESEARCH INTRO
+    ========================================================= */
+
+    .research-section {
+      padding:
+        72px 1.5rem;
+
+      position:
+        relative;
+    }
+
+    .section-heading {
+      max-width:
+        780px;
+
+      margin:
+        0 auto 42px;
+
+      text-align:
+        center;
+    }
+
+    .section-kicker {
+      color:
+        var(--primary);
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size:
+        .7rem;
+
+      font-weight:
+        600;
+
+      letter-spacing:
+        .10em;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom:
+        10px;
+    }
+
+    .section-heading h2 {
+      color:
+        var(--dark);
+
+      font-size:
+        clamp(
+          1.85rem,
+          4vw,
+          2.65rem
+        );
+
+      letter-spacing:
+        -.04em;
+
+      margin-bottom:
+        13px;
+    }
+
+    .section-heading p {
+      color:
+        var(--muted);
+
+      line-height:
+        1.8;
+    }
+
+    /* =========================================================
+       RESEARCH WELCOME
+    ========================================================= */
+
+    .welcome-card {
+      max-width:
+        1100px;
+
+      margin:
+        0 auto 55px;
+
+      padding:
+        36px;
+
+      border-radius:
+        22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #f8fbff
+        );
+
+      border:
+        1px solid
+        #dbeafe;
+
+      box-shadow:
+        var(--shadow-md);
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+    }
+
+    .welcome-card::after {
+      content:
+        "OPEN";
+
+      position:
+        absolute;
+
+      right:
+        -20px;
+
+      bottom:
+        -25px;
+
+      color:
+        rgba(41,98,255,.035);
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size:
+        7rem;
+
+      font-weight:
+        600;
+    }
+
+    .welcome-grid {
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        minmax(0,1.35fr)
+        minmax(280px,.65fr);
+
+      gap:
+        35px;
+
+      align-items:
+        center;
+    }
+
+    .welcome-label {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      color:
+        var(--primary);
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size:
+        .72rem;
+
+      font-weight:
+        600;
+
+      letter-spacing:
+        .08em;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom:
+        13px;
+    }
+
+    .welcome-content h2 {
+      color:
+        var(--dark);
+
+      font-size:
+        clamp(
+          1.65rem,
+          3vw,
+          2.25rem
+        );
+
+      letter-spacing:
+        -.035em;
+
+      margin-bottom:
+        13px;
+    }
+
+    .welcome-content p {
+      color:
+        #475569;
+
+      line-height:
+        1.8;
+
+      margin-bottom:
+        13px;
+    }
+
+    .welcome-content strong {
+      color:
+        var(--dark);
+    }
+
+    .welcome-people {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2,1fr);
+
+      gap:
+        10px;
+    }
+
+    .person-type {
+      min-height:
+        95px;
+
+      padding:
+        17px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        13px;
+
+      background:
+        rgba(255,255,255,.8);
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      justify-content:
+        center;
+
+      gap:
+        7px;
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .person-type:hover {
+      transform:
+        translateY(-3px);
+
+      border-color:
+        #bfdbfe;
+
+      box-shadow:
+        0 10px 25px
+        rgba(15,23,42,.06);
+    }
+
+    .person-type i {
+      color:
+        var(--primary);
+
+      font-size:
+        1.15rem;
+    }
+
+    .person-type strong {
+      color:
+        #334155;
+
+      font-size:
+        .82rem;
+    }
+
+    .person-type span {
+      color:
+        #94a3b8;
+
+      font-size:
+        .72rem;
+    }
+
+    /* =========================================================
+       RESEARCH CARDS
+    ========================================================= */
+
+    .research-grid {
+      max-width:
+        1100px;
+
+      margin:
+        0 auto;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+      gap:
+        22px;
+    }
+
+    .research-card {
+      background:
+        rgba(255,255,255,.96);
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        var(--radius);
+
+      padding:
+        29px;
+
+      box-shadow:
+        var(--shadow-sm);
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
+
+    .research-card::after {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        120px;
+
+      height:
+        120px;
+
+      border-radius:
+        50%;
+
+      right:
+        -65px;
+
+      top:
+        -65px;
+
+      background:
+        rgba(41,98,255,.035);
+    }
+
+    .research-card:hover {
+      transform:
+        translateY(-4px);
+
+      box-shadow:
+        var(--shadow-md);
+
+      border-color:
+        #d5deeb;
+    }
+
+    .research-icon {
+      width:
+        48px;
+
+      height:
+        48px;
+
+      border-radius:
+        13px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      margin-bottom:
+        17px;
+
+      background:
+        #eff6ff;
+
+      color:
+        var(--primary);
+
+      font-size:
+        1.15rem;
+    }
+
+    .research-card:nth-child(2)
+    .research-icon {
+      background:
+        #fff7ed;
+
+      color:
+        var(--orange);
+    }
+
+    .research-card:nth-child(3)
+    .research-icon {
+      background:
+        #f5f3ff;
+
+      color:
+        var(--purple);
+    }
+
+    .research-card:nth-child(4)
+    .research-icon {
+      background:
+        #ecfdf5;
+
+      color:
+        var(--green);
+    }
+
+    .research-card h3 {
+      color:
+        var(--dark);
+
+      font-size:
+        1.22rem;
+
+      letter-spacing:
+        -.025em;
+
+      margin-bottom:
+        10px;
+    }
+
+    .research-card p {
+      color:
+        #475569;
+
+      line-height:
+        1.75;
+
+      font-size:
+        .91rem;
+    }
+
+    .research-tag {
+      display:
+        inline-flex;
+
+      margin-top:
+        18px;
+
+      padding:
+        5px 9px;
+
+      border-radius:
+        7px;
+
+      background:
+        #f8fafc;
+
+      border:
+        1px solid
+        var(--border);
+
+      color:
+        #64748b;
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size:
+        .63rem;
+    }
+
+    /* =========================================================
+       RESEARCH TRACKS
+    ========================================================= */
+
+    .tracks-section {
+      padding:
+        70px 1.5rem;
+
+      background:
+        #fff;
+
+      border-top:
+        1px solid
+        var(--border);
+
+      border-bottom:
+        1px solid
+        var(--border);
+    }
+
+    .tracks-grid {
+      max-width:
+        1000px;
+
+      margin:
+        0 auto;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:
+        18px;
+    }
+
+    .track-card {
+      padding:
+        25px 21px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        15px;
+
+      background:
+        #fff;
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .track-card:hover {
+      transform:
+        translateY(-3px);
+
+      border-color:
+        #bfdbfe;
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+    .track-number {
+      color:
+        #94a3b8;
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size:
+        .67rem;
+
+      margin-bottom:
+        13px;
+    }
+
+    .track-card h3 {
+      color:
+        var(--dark);
+
+      font-size:
+        .98rem;
+
+      margin-bottom:
+        8px;
+    }
+
+    .track-card p {
+      color:
+        var(--muted);
+
+      font-size:
+        .82rem;
+
+      line-height:
+        1.65;
+    }
+
+    /* =========================================================
+       COLLABORATION
+    ========================================================= */
+
+    .collaboration-section {
+      padding:
+        75px 1.5rem;
+    }
+
+    .collaboration-card {
+      max-width:
+        1100px;
+
+      margin:
+        0 auto;
+
+      padding:
+        42px;
+
+      border-radius:
+        22px;
+
+      color:
+        #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0b1220,
+          #172554
+        );
+
+      box-shadow:
+        var(--shadow-md);
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+    }
+
+    .collaboration-card::before {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        300px;
+
+      height:
+        300px;
+
+      border:
+        1px solid
+        rgba(96,165,250,.13);
+
+      border-radius:
+        50%;
+
+      right:
+        -100px;
+
+      top:
+        -130px;
+    }
+
+    .collaboration-grid {
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        minmax(0,1.2fr)
+        minmax(280px,.8fr);
+
+      gap:
+        35px;
+
+      align-items:
+        center;
+    }
+
+    .collaboration-card .kicker {
+      color:
+        #93c5fd;
+
+      font-family:
+        "JetBrains Mono", monospace;
+
+      font-size:
+        .68rem;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .1em;
+
+      margin-bottom:
+        11px;
+    }
+
+    .collaboration-card h2 {
+      color:
+        #fff;
+
+      font-size:
+        clamp(
+          1.65rem,
+          3vw,
+          2.3rem
+        );
+
+      letter-spacing:
+        -.035em;
+
+      margin-bottom:
+        13px;
+    }
+
+    .collaboration-card p {
+      color:
+        #cbd5e1;
+
+      line-height:
+        1.8;
+
+      font-size:
+        .92rem;
+    }
+
+    .contribution-list {
+      display:
+        grid;
+
+      gap:
+        9px;
+    }
+
+    .contribution-item {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        11px;
+
+      padding:
+        11px 13px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.09);
+
+      border-radius:
+        10px;
+
+      background:
+        rgba(255,255,255,.045);
+
+      color:
+        #dbeafe;
+
+      font-size:
+        .8rem;
+
+      font-weight:
+        600;
+    }
+
+    .contribution-item i {
+      color:
+        #60a5fa;
+    }
+
+    .collaboration-actions {
+      margin-top:
+        22px;
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        10px;
+    }
+
+    .collaboration-actions .button {
+      border-radius:
+        10px;
+
+      font-weight:
+        700;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .site-footer {
+      margin-top:
+        auto;
+
+      background:
+        #0b1220;
+
+      color:
+        #94a3b8;
+
+      padding:
+        38px 1.5rem 28px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.06);
+    }
+
+    .footer-inner {
+      max-width:
+        1100px;
+
+      margin:
+        0 auto;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+    }
+
+    .footer-brand {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      color:
+        #fff;
+
+      font-weight:
+        800;
+    }
+
+    .footer-brand .brand-icon {
+      width:
+        30px;
+
+      height:
+        30px;
+
+      border-radius:
+        8px;
+
+      font-size:
+        .8rem;
+    }
+
+    .footer-text {
+      margin-top:
+        8px;
+
+      font-size:
+        .78rem;
+
+      color:
+        #64748b;
+    }
+
+    .footer-links {
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        6px;
+    }
+
+    .footer-links a {
+      color:
+        #94a3b8;
+
+      text-decoration:
+        none;
+
+      font-size:
+        .82rem;
+
+      padding:
+        6px 8px;
+
+      border-radius:
+        7px;
+    }
+
+    .footer-links a:hover {
+      color:
+        #fff;
+
+      background:
+        rgba(255,255,255,.06);
+    }
+
+    /* =========================================================
+       BACK TO TOP
+    ========================================================= */
+
+    .back-to-top {
+      position:
+        fixed;
+
+      right:
+        22px;
+
+      bottom:
+        22px;
+
+      width:
+        43px;
+
+      height:
+        43px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        12px;
+
+      background:
+        #fff;
+
+      color:
+        var(--dark);
+
+      box-shadow:
+        0 10px 25px
+        rgba(15,23,42,.12);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      cursor:
+        pointer;
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      transform:
+        translateY(10px);
+
+      transition:
+        all .25s ease;
+
+      z-index:
+        900;
+    }
+
+    .back-to-top.is-visible {
+      opacity:
+        1;
+
+      visibility:
+        visible;
+
+      transform:
+        translateY(0);
+    }
+
+    .back-to-top:hover {
+      color:
+        var(--primary);
+
+      transform:
+        translateY(-2px);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1023px) {
+
+      .site-navbar .navbar-menu {
+        position:
+          fixed;
+
+        top:
+          0;
+
+        right:
+          0;
+
+        width:
+          min(86vw,360px);
+
+        height:
+          100vh;
+
+        min-height:
+          100vh;
+
+        padding:
+          82px 18px 24px;
+
+        background:
+          #0b1220 !important;
+
+        box-shadow:
+          -20px 0 50px
+          rgba(0,0,0,.25);
+
+        transform:
+          translateX(105%);
+
+        visibility:
+          hidden;
+
+        opacity:
+          0;
+
+        transition:
+          transform .28s ease,
+          opacity .2s ease,
+          visibility .28s ease;
+
+        overflow-y:
+          auto;
+
+        z-index:
+          999;
+
+        display:
+          block;
+      }
+
+      .site-navbar
+      .navbar-menu.is-active {
+        transform:
+          translateX(0);
+
+        visibility:
+          visible;
+
+        opacity:
+          1;
+      }
+
+      .site-navbar .navbar-end {
+        display:
+          flex;
+
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
+
+        gap:
+          5px;
+      }
+
+      .site-navbar .navbar-item {
+        width:
+          100%;
+
+        margin:
+          0;
+
+        min-height:
+          48px;
+
+        padding:
+          12px 14px;
+
+        display:
+          flex;
+
+        align-items:
+          center;
+
+        border-radius:
+          10px;
+      }
+
+      .github-link {
+        margin:
+          10px 0 0 !important;
+
+        justify-content:
+          center;
+      }
+
+      .welcome-grid,
+      .collaboration-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .tracks-grid {
+        grid-template-columns:
+          repeat(2,1fr);
       }
     }
-    /* Navbar customization */
-    .navbar-brand, .navbar-menu { background-color: var(--dark); }
-    .navbar-item, .navbar-link { color: #fff !important; }
-    .navbar-link:hover, .navbar-item:hover, .navbar-link.is-active { background-color: rgba(255,255,255,0.1); color: #fff !important; }
-    .navbar-dropdown a.navbar-item:hover { background-color: rgba(255,255,255,0.1); color: #fff; }
-    .navbar-burger { color: #fff; }
+
+    @media (max-width: 700px) {
+
+      .research-hero {
+        min-height:
+          450px;
+      }
+
+      .hero-content {
+        padding:
+          55px 0;
+      }
+
+      .hero-description {
+        font-size:
+          .98rem !important;
+      }
+
+      .research-section,
+      .collaboration-section {
+        padding:
+          53px 1rem;
+      }
+
+      .tracks-section {
+        padding:
+          52px 1rem;
+      }
+
+      .welcome-card {
+        padding:
+          25px 18px;
+      }
+
+      .welcome-people {
+        grid-template-columns:
+          repeat(2,1fr);
+      }
+
+      .research-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .research-card {
+        padding:
+          24px;
+      }
+
+      .tracks-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .collaboration-card {
+        padding:
+          30px 21px;
+      }
+
+      .footer-inner {
+        flex-direction:
+          column;
+
+        align-items:
+          flex-start;
+      }
+
+      .footer-links {
+        width:
+          100%;
+      }
+
+      .back-to-top {
+        right:
+          14px;
+
+        bottom:
+          14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .brand-subtitle {
+        display:
+          none;
+      }
+
+      .brand-name {
+        font-size:
+          .92rem;
+      }
+
+      .hero-title {
+        font-size:
+          2.35rem !important;
+      }
+
+      .hero-meta {
+        display:
+          grid;
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .research-badge {
+        width:
+          fit-content;
+      }
+
+      .hero-actions {
+        flex-direction:
+          column;
+
+        width:
+          100%;
+      }
+
+      .hero-actions .button {
+        width:
+          100%;
+      }
+
+      .welcome-people {
+        grid-template-columns:
+          1fr;
+      }
+    }
+
+    /* =========================================================
+       ACCESSIBILITY
+    ========================================================= */
+
+    :focus-visible {
+      outline:
+        3px solid
+        rgba(96,165,250,.65);
+
+      outline-offset:
+        3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior:
+          auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          .01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          .01ms !important;
+
+        scroll-behavior:
+          auto !important;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav
+  class="navbar site-navbar"
+  role="navigation"
+  aria-label="Main navigation"
+>
+
   <div class="container">
+
     <div class="navbar-brand">
-      <a class="navbar-item" href="index.html">
-        <span class="icon"><i class="fas fa-microchip"></i></span>
-        <span>DDLSim-Lab</span>
+
+      <a
+        class="navbar-item brand-link"
+        href="index.html"
+      >
+
+        <span class="brand-icon">
+          <i
+            class="fas fa-microchip"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span>
+
+          <span class="brand-name">
+            DDLSim-Lab
+          </span>
+
+          <span class="brand-subtitle">
+            OPEN RESEARCH PROJECT
+          </span>
+
+        </span>
+
       </a>
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+
+
+      <a
+        role="button"
+        class="navbar-burger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        data-target="mainNavigation"
+      >
+
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
+
       </a>
+
     </div>
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start"></div>
+
+
+    <div
+      id="mainNavigation"
+      class="navbar-menu"
+    >
+
       <div class="navbar-end">
-        <a class="navbar-item" href="index.html">Home</a>
-        <a class="navbar-item" href="about.html">About & Call</a>
-        <a class="navbar-item" href="research.html">Research</a>
-        <a class="navbar-item" href="documentation.html">Docs</a>
-        <a class="navbar-item" href="https://github.com/ktruby-oss/DDLSim-Lab" target="_blank">
-          <span class="icon"><i class="fab fa-github"></i></span>
-          <span>GitHub</span>
+
+        <a
+          class="navbar-item"
+          href="index.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-home"></i>
+          </span>
+          <span>Home</span>
         </a>
+
+
+        <a
+          class="navbar-item"
+          href="about.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-info-circle"></i>
+          </span>
+          <span>About &amp; Call</span>
+        </a>
+
+
+        <a
+          class="navbar-item is-active"
+          href="research.html"
+          aria-current="page"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-flask"></i>
+          </span>
+          <span>Research</span>
+        </a>
+
+
+        <a
+          class="navbar-item"
+          href="documentation.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-book"></i>
+          </span>
+          <span>Docs</span>
+        </a>
+
+
+        <a
+          class="navbar-item"
+          href="blog.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-newspaper"></i>
+          </span>
+          <span>Blog</span>
+        </a>
+
+
+        <a
+          class="navbar-item"
+          href="contact.html"
+        >
+          <span class="icon is-small">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span>Contact</span>
+        </a>
+
+
+        <a
+          class="navbar-item github-link"
+          href="https://github.com/ktruby-oss/DDLSim-Lab"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <span class="icon is-small">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span>GitHub</span>
+
+        </a>
+
       </div>
+
     </div>
+
   </div>
+
 </nav>
 
-<section class="hero is-fullheight-with-navbar">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <div class="hero-banner fade-in">
-        <h1 class="title is-1">DDLSim-Lab</h1>
-        <h2 class="subtitle is-3">Distributed simulation environment using bare metal nodes</h2>
-        <div style="margin-top: 20px;">
-          <span class="tag is-info is-medium"><i class="fas fa-check-circle" style="margin-right:5px;"></i> Active Research Since 2025</span>
-          <span class="tag is-success is-medium"><i class="fab fa-osi" style="margin-right:5px;"></i> Fully Open Source</span>
-        </div>
-        <div style="margin-top: 30px;">
-          <p style="font-size: 1.2rem;"><strong>Project Lead:</strong> Kaitlyn Brishae Truby</p>
-          <p style="font-size: 1rem; color: #94a3b8;">Contributed by many American universities & Research Labs</p>
-        </div>
-        <div style="margin-top: 30px;">
-          <a href="https://github.com/ktruby-oss/DDLSim-Lab" class="button is-primary is-medium is-rounded" style="margin-right: 15px;">
-            <span class="icon"><i class="fab fa-github"></i></span><span>View on GitHub</span>
-          </a>
-          <a href="research.html" class="button is-light is-medium is-rounded is-outlined">
-            <span class="icon"><i class="fas fa-network-wired"></i></span><span>Explore Capabilities</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<div
+  class="mobile-overlay"
+  id="mobileOverlay"
+  aria-hidden="true"
+></div>
 
-<section class="section">
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="research-hero">
+
+  <div
+    class="hero-orbit"
+    aria-hidden="true"
+  ></div>
+
   <div class="container">
-    <div class="columns is-multiline">
-      <!-- Card 1 -->
-      <div class="column is-6">
-        <div class="info-card">
-          <h3 class="title is-3"><i class="fas fa-layer-group has-text-primary" style="margin-right: 10px;"></i>Advanced Fault Injection</h3>
-          <p style="color: #475569; line-height: 1.6;">
-            Supports Byzantine failures, network partitioning, cascading failures, and hardware-level faults (e.g., bit flips, NIC drops) to test system resilience in highly volatile environments.
-          </p>
-        </div>
-      </div>
-      
-      <!-- Card 2 -->
-      <div class="column is-6">
-        <div class="info-card">
-          <h3 class="title is-3"><i class="fas fa-play-circle" style="color: #f59e0b; margin-right: 10px;"></i>AI-Driven Scheduling</h3>
-          <p style="color: #475569; line-height: 1.6;">
-            Train reinforcement learning agents to dynamically allocate compute resources and bandwidth based on workload characteristics and real-time network constraints.
-          </p>
-        </div>
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+
+        <i class="fas fa-flask"></i>
+
+        DDLSIM-LAB / RESEARCH
+
       </div>
 
-      <!-- Card 3 -->
-      <div class="column is-6">
-        <div class="info-card">
-          <h3 class="title is-3"><i class="fas fa-cloud" style="color: #8b5cf6; margin-right: 10px;"></i>Edge AI Simulation</h3>
-          <p style="color: #475569; line-height: 1.6;">
-            Model heterogeneous edge-cloud hierarchies with constrained devices, intermittent connectivity, and strict latency bounds to represent modern IoT setups and federated learning architectures.
-          </p>
-        </div>
+
+      <h1 class="title hero-title">
+
+        Distributed systems,
+        <span>made researchable.</span>
+
+      </h1>
+
+
+      <p class="subtitle hero-description">
+
+        DDLSim-Lab is a distributed simulation environment designed
+        for experimenting with deep learning systems, network conditions,
+        failures, scheduling, edge environments, and system resilience.
+
+      </p>
+
+
+      <div class="hero-meta">
+
+        <span class="research-badge">
+          <i class="fas fa-check-circle"></i>
+          Active Research Since 2025
+        </span>
+
+        <span class="research-badge">
+          <i class="fab fa-osi"></i>
+          Fully Open Source
+        </span>
+
+        <span class="research-badge">
+          <i class="fas fa-code-branch"></i>
+          Reproducible Experiments
+        </span>
+
       </div>
 
-      <!-- Card 4 -->
-      <div class="column is-6">
-        <div class="info-card">
-          <h3 class="title is-3"><i class="fas fa-shield-alt" style="color: #10b981; margin-right: 10px;"></i>Cybersecurity for AI</h3>
-          <p style="color: #475569; line-height: 1.6;">
-            Includes dedicated modules for simulating adversarial network attacks, intrusion detection systems, gradient leakage, and secure enclave training environments across the cluster.
-          </p>
-        </div>
+
+      <div class="hero-actions">
+
+        <a
+          href="https://github.com/ktruby-oss/DDLSim-Lab"
+          class="button button-primary is-medium"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span>View on GitHub</span>
+
+        </a>
+
+
+        <a
+          href="#capabilities"
+          class="button button-ghost is-medium"
+        >
+
+          <span class="icon">
+            <i class="fas fa-network-wired"></i>
+          </span>
+
+          <span>Explore Capabilities</span>
+
+        </a>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>© 2026 DDLSim-Lab. All rights reserved.</p>
+
+<!-- =========================================================
+     RESEARCH INTRO
+========================================================= -->
+
+<section
+  class="research-section"
+  id="capabilities"
+>
+
+  <div class="container">
+
+    <div class="section-heading">
+
+      <div class="section-kicker">
+        Research Environment
+      </div>
+
+      <h2>
+        A space for distributed AI experimentation
+      </h2>
+
+      <p>
+        The environment brings together configurable network behavior,
+        failure scenarios, compute resources, and distributed workloads
+        so researchers and developers can explore system behavior under
+        controlled conditions.
+      </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         OPEN RESEARCH WELCOME
+    ====================================================== -->
+
+    <div class="welcome-card">
+
+      <div class="welcome-grid">
+
+        <div class="welcome-content">
+
+          <div class="welcome-label">
+
+            <i class="fas fa-door-open"></i>
+
+            Open Research &amp; Collaboration
+
+          </div>
+
+
+          <h2>
+            Everyone working on the problem is welcome.
+          </h2>
+
+
+          <p>
+            DDLSim-Lab welcomes <strong>researchers, research groups,
+            laboratories, developers, students, engineers, and independent
+            contributors</strong> interested in distributed deep learning,
+            simulation, networking, systems, or AI infrastructure.
+          </p>
+
+
+          <p>
+            You can use the project to explore an idea, reproduce an
+            experiment, build an extension, report an issue, propose a
+            research direction, or contribute improvements to the codebase.
+          </p>
+
+
+          <p>
+            <strong>
+              Whether you are an individual researcher or part of a
+              university, laboratory, company, or open-source community,
+              you are welcome to participate.
+            </strong>
+          </p>
+
+        </div>
+
+
+        <div class="welcome-people">
+
+          <div class="person-type">
+
+            <i class="fas fa-user-graduate"></i>
+
+            <strong>Researchers</strong>
+
+            <span>Experiments &amp; studies</span>
+
+          </div>
+
+
+          <div class="person-type">
+
+            <i class="fas fa-university"></i>
+
+            <strong>Research Groups</strong>
+
+            <span>Collaborative projects</span>
+
+          </div>
+
+
+          <div class="person-type">
+
+            <i class="fas fa-microscope"></i>
+
+            <strong>Laboratories</strong>
+
+            <span>Research environments</span>
+
+          </div>
+
+
+          <div class="person-type">
+
+            <i class="fas fa-code"></i>
+
+            <strong>Developers</strong>
+
+            <span>Tools &amp; extensions</span>
+
+          </div>
+
+
+          <div class="person-type">
+
+            <i class="fas fa-user-graduate"></i>
+
+            <strong>Students</strong>
+
+            <span>Learning &amp; projects</span>
+
+          </div>
+
+
+          <div class="person-type">
+
+            <i class="fas fa-users"></i>
+
+            <strong>Contributors</strong>
+
+            <span>Open-source work</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CAPABILITY CARDS
+    ====================================================== -->
+
+    <div class="research-grid">
+
+
+      <!-- CARD 1 -->
+
+      <article class="research-card">
+
+        <div class="research-icon">
+          <i class="fas fa-layer-group"></i>
+        </div>
+
+
+        <h3>
+          Advanced Fault Injection
+        </h3>
+
+
+        <p>
+          Supports Byzantine failures, network partitioning,
+          cascading failures, and hardware-level faults such as
+          bit flips and NIC drops to test system resilience in
+          highly volatile environments.
+        </p>
+
+
+        <span class="research-tag">
+          RESILIENCE / FAULTS
+        </span>
+
+      </article>
+
+
+      <!-- CARD 2 -->
+
+      <article class="research-card">
+
+        <div class="research-icon">
+          <i class="fas fa-play-circle"></i>
+        </div>
+
+
+        <h3>
+          AI-Driven Scheduling
+        </h3>
+
+
+        <p>
+          Train reinforcement learning agents to dynamically
+          allocate compute resources and bandwidth based on
+          workload characteristics and real-time network constraints.
+        </p>
+
+
+        <span class="research-tag">
+          RL / SCHEDULING
+        </span>
+
+      </article>
+
+
+      <!-- CARD 3 -->
+
+      <article class="research-card">
+
+        <div class="research-icon">
+          <i class="fas fa-cloud"></i>
+        </div>
+
+
+        <h3>
+          Edge AI Simulation
+        </h3>
+
+
+        <p>
+          Model heterogeneous edge-cloud hierarchies with
+          constrained devices, intermittent connectivity, and
+          strict latency bounds to represent modern IoT setups
+          and federated learning architectures.
+        </p>
+
+
+        <span class="research-tag">
+          EDGE / CLOUD / IOT
+        </span>
+
+      </article>
+
+
+      <!-- CARD 4 -->
+
+      <article class="research-card">
+
+        <div class="research-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+
+
+        <h3>
+          Cybersecurity for AI
+        </h3>
+
+
+        <p>
+          Includes dedicated modules for simulating adversarial
+          network attacks, intrusion detection systems, gradient
+          leakage, and secure enclave training environments across
+          the cluster.
+        </p>
+
+
+        <span class="research-tag">
+          SECURITY / AI
+        </span>
+
+      </article>
+
+    </div>
+
   </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESEARCH TRACKS
+========================================================= -->
+
+<section class="tracks-section">
+
+  <div class="container">
+
+    <div class="section-heading">
+
+      <div class="section-kicker">
+        Research Directions
+      </div>
+
+      <h2>
+        Possible experimental directions
+      </h2>
+
+      <p>
+        The platform can support different research questions around
+        distributed learning, systems, networking, reliability,
+        and infrastructure.
+      </p>
+
+    </div>
+
+
+    <div class="tracks-grid">
+
+
+      <article class="track-card">
+
+        <div class="track-number">
+          TRACK / 01
+        </div>
+
+        <h3>
+          Distributed Training
+        </h3>
+
+        <p>
+          Study distributed deep learning behavior across
+          heterogeneous nodes and changing system conditions.
+        </p>
+
+      </article>
+
+
+      <article class="track-card">
+
+        <div class="track-number">
+          TRACK / 02
+        </div>
+
+        <h3>
+          Network Conditions
+        </h3>
+
+        <p>
+          Investigate the effects of latency, packet loss,
+          bandwidth constraints, and network instability.
+        </p>
+
+      </article>
+
+
+      <article class="track-card">
+
+        <div class="track-number">
+          TRACK / 03
+        </div>
+
+        <h3>
+          Fault Tolerance
+        </h3>
+
+        <p>
+          Explore how distributed systems respond to failures
+          and degraded infrastructure.
+        </p>
+
+      </article>
+
+
+      <article class="track-card">
+
+        <div class="track-number">
+          TRACK / 04
+        </div>
+
+        <h3>
+          Edge &amp; Federated AI
+        </h3>
+
+        <p>
+          Experiment with constrained devices, distributed data,
+          and heterogeneous edge-cloud environments.
+        </p>
+
+      </article>
+
+
+      <article class="track-card">
+
+        <div class="track-number">
+          TRACK / 05
+        </div>
+
+        <h3>
+          Resource Scheduling
+        </h3>
+
+        <p>
+          Investigate strategies for allocating compute,
+          bandwidth, and other distributed resources.
+        </p>
+
+      </article>
+
+
+      <article class="track-card">
+
+        <div class="track-number">
+          TRACK / 06
+        </div>
+
+        <h3>
+          AI Security
+        </h3>
+
+        <p>
+          Explore security scenarios affecting distributed
+          AI workloads and their surrounding infrastructure.
+        </p>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     COLLABORATION
+========================================================= -->
+
+<section
+  class="collaboration-section"
+  id="collaboration"
+>
+
+  <div class="container">
+
+    <div class="collaboration-card">
+
+      <div class="collaboration-grid">
+
+
+        <div>
+
+          <div class="kicker">
+            Open Collaboration
+          </div>
+
+
+          <h2>
+            Have an idea worth testing?
+          </h2>
+
+
+          <p>
+            DDLSim-Lab is open to contributions from people working
+            across research, engineering, academia, and open source.
+            Contributions can range from a small bug fix to a new
+            experiment, module, configuration, documentation improvement,
+            or research direction.
+          </p>
+
+
+          <div class="collaboration-actions">
+
+            <a
+              href="https://github.com/ktruby-oss/DDLSim-Lab"
+              class="button is-light"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+
+              <span>Contribute on GitHub</span>
+
+            </a>
+
+
+            <a
+              href="contact.html"
+              class="button button-ghost"
+            >
+
+              <span class="icon">
+                <i class="fas fa-comments"></i>
+              </span>
+
+              <span>Start a Conversation</span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="contribution-list">
+
+          <div class="contribution-item">
+
+            <i class="fas fa-code"></i>
+
+            Improve the codebase
+
+          </div>
+
+
+          <div class="contribution-item">
+
+            <i class="fas fa-vial"></i>
+
+            Add experiments
+
+          </div>
+
+
+          <div class="contribution-item">
+
+            <i class="fas fa-cogs"></i>
+
+            Build new modules
+
+          </div>
+
+
+          <div class="contribution-item">
+
+            <i class="fas fa-file-alt"></i>
+
+            Improve documentation
+
+          </div>
+
+
+          <div class="contribution-item">
+
+            <i class="fas fa-lightbulb"></i>
+
+            Propose research ideas
+
+          </div>
+
+
+          <div class="contribution-item">
+
+            <i class="fas fa-bug"></i>
+
+            Report &amp; investigate issues
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+  <div class="footer-inner">
+
+    <div>
+
+      <div class="footer-brand">
+
+        <span class="brand-icon">
+
+          <i class="fas fa-microchip"></i>
+
+        </span>
+
+        <span>
+          DDLSim-Lab
+        </span>
+
+      </div>
+
+
+      <div class="footer-text">
+
+        © 2026 DDLSim-Lab. All rights reserved.
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="research.html">
+        Research
+      </a>
+
+      <a href="documentation.html">
+        Docs
+      </a>
+
+      <a href="blog.html">
+        Blog
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a
+        href="https://github.com/ktruby-oss/DDLSim-Lab"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
+
+    </div>
+
+  </div>
+
 </footer>
 
+
+<!-- =========================================================
+     BACK TO TOP
+========================================================= -->
+
+<button
+  class="back-to-top"
+  id="backToTop"
+  type="button"
+  aria-label="Back to top"
+>
+
+  <i class="fas fa-arrow-up"></i>
+
+</button>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Get all "navbar-burger" elements
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-    // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
-      // Add a click event on each of them
-      $navbarBurgers.forEach(el => {
-        el.addEventListener('click', () => {
-          // Get the target from the "data-target" attribute
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
-        });
-      });
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================================================
+     MOBILE NAVIGATION
+  ========================================================= */
+
+  const burger =
+    document.querySelector(".navbar-burger");
+
+  const menu =
+    document.getElementById("mainNavigation");
+
+  const overlay =
+    document.getElementById("mobileOverlay");
+
+
+  function openMenu() {
+
+    if (!burger || !menu) return;
+
+    burger.classList.add(
+      "is-active"
+    );
+
+    menu.classList.add(
+      "is-active"
+    );
+
+    burger.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    burger.setAttribute(
+      "aria-label",
+      "Close navigation menu"
+    );
+
+    document.body.classList.add(
+      "menu-open"
+    );
+  }
+
+
+  function closeMenu() {
+
+    if (!burger || !menu) return;
+
+    burger.classList.remove(
+      "is-active"
+    );
+
+    menu.classList.remove(
+      "is-active"
+    );
+
+    burger.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    burger.setAttribute(
+      "aria-label",
+      "Open navigation menu"
+    );
+
+    document.body.classList.remove(
+      "menu-open"
+    );
+  }
+
+
+  function toggleMenu() {
+
+    if (
+      menu.classList.contains(
+        "is-active"
+      )
+    ) {
+
+      closeMenu();
+
+    } else {
+
+      openMenu();
+
     }
-  });
+  }
+
+
+  if (burger) {
+
+    burger.addEventListener(
+      "click",
+      toggleMenu
+    );
+
+  }
+
+
+  if (overlay) {
+
+    overlay.addEventListener(
+      "click",
+      closeMenu
+    );
+
+  }
+
+
+  document
+    .querySelectorAll(
+      "#mainNavigation a"
+    )
+    .forEach(link => {
+
+      link.addEventListener(
+        "click",
+        closeMenu
+      );
+
+    });
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeMenu();
+
+      }
+
+    }
+  );
+
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      if (
+        window.innerWidth > 1023
+      ) {
+
+        closeMenu();
+
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     INTERNAL SMOOTH SCROLL
+  ========================================================= */
+
+  document
+    .querySelectorAll(
+      'a[href^="#"]'
+    )
+    .forEach(link => {
+
+      link.addEventListener(
+        "click",
+        event => {
+
+          const targetId =
+            link.getAttribute(
+              "href"
+            );
+
+          if (
+            !targetId ||
+            targetId === "#"
+          ) {
+            return;
+          }
+
+          const target =
+            document.querySelector(
+              targetId
+            );
+
+          if (!target) {
+            return;
+          }
+
+          event.preventDefault();
+
+          const offset = 82;
+
+          const position =
+            target.getBoundingClientRect().top +
+            window.scrollY -
+            offset;
+
+          window.scrollTo({
+            top: position,
+            behavior: "smooth"
+          });
+
+        }
+      );
+
+    });
+
+
+  /* =========================================================
+     BACK TO TOP
+  ========================================================= */
+
+  const backToTop =
+    document.getElementById(
+      "backToTop"
+    );
+
+
+  function updateBackToTop() {
+
+    if (!backToTop) return;
+
+    if (
+      window.scrollY > 500
+    ) {
+
+      backToTop.classList.add(
+        "is-visible"
+      );
+
+    } else {
+
+      backToTop.classList.remove(
+        "is-visible"
+      );
+
+    }
+
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    updateBackToTop,
+    {
+      passive: true
+    }
+  );
+
+
+  updateBackToTop();
+
+
+  if (backToTop) {
+
+    backToTop.addEventListener(
+      "click",
+      () => {
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     CURRENT YEAR
+  ========================================================= */
+
+  const footerText =
+    document.querySelector(
+      ".footer-text"
+    );
+
+
+  if (footerText) {
+
+    footerText.textContent =
+      `© ${new Date().getFullYear()} DDLSim-Lab. All rights reserved.`;
+
+  }
+
+});
 </script>
 
 </body>
